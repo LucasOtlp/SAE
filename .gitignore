@@ -1,0 +1,17 @@
+# Fichiers temporaires / logs
+*.tmp
+*.log
+
+# Python
+__pycache__/
+*.pyc
+
+# Node / JS
+node_modules/
+dist/
+
+# OS
+.DS_Store
+Thumbs.db
+
+.vscode
