@@ -189,36 +189,76 @@ include_once './parties_fixes/header.html';
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingOne">
             <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                Comment je fais ?
+                À quoi sert le carnet d’entretien ?
             </button>
         </h2>
         <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                Comment quoi, je comprends pas la question...
+                Le carnet d'entretien est un registre qui vous aide à garder une trace de toutes les opérations d'entretien effectuées sur votre voiture depuis que vous l'avez achetée.
+                <ul>
+                    <li>Chaque opération est classée selon son importance.</li>
+                    <li>Cela vous permet d'anticiper et de planifier le budget pour les futurs entretiens, en tenant compte de l'âge de votre voiture, de son kilométrage, et de son historique d'entretien.</li>
+                </ul>
             </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingTwo">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                Qui suis-je ?
+                À quoi sert l’assistant de fiabilité ?
             </button>
         </h2>
         <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                Tu m'en pose de ces questions...
+                L'Assistant Fiabilité est un outil qui vous donne des informations spécifiques sur votre voiture, telles que la fiabilité de certaines pièces et sa consommation de carburant.<br>
+                Son rôle principal est de vous informer à l'avance des particularités notables de votre véhicule.<br>
+                En clair, il vous sert de guide pour connaître les points forts et faibles de votre modèle afin d'éviter les surprises.
             </div>
         </div>
     </div>
     <div class="accordion-item">
         <h2 class="accordion-header" id="headingThree">
             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                Comment je m'appelle ?
+                C’est quoi les tutoriels mécaniques ?
             </button>
         </h2>
         <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
             <div class="accordion-body">
-                t'es bete ou quoi..
+                Les tutoriels mécaniques sont de courtes vidéos qui couvrent divers sujets liés à la conduite et aux véhicules.
+                <ul>
+                    <li>Leur but principal est de vous aider à réduire vos dépenses liées à votre voiture.</li>
+                    <li>Ils vous donnent des astuces pratiques pour économiser sur la consommation de carburant, l'entretien ou encore pour améliorer la sécurité (et donc éviter les accidents coûteux).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFour">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                Quels sont les avantages de l’espace membre ?
+            </button>
+        </h2>
+        <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                Le statut de membre vous donne accès à un suivi complet pour chacun de vos véhicules et à toutes les fonctionnalités de l'application.
+                <ul>
+                    <li>Vous bénéficiez notamment du carnet d'entretien et de l'Assistant Fiabilité.</li>
+                    <li>Il vous permet aussi de suivre le prix du carburant, et donc le coût de ravitaillement de votre/vos véhicules.</li>
+                    <li>Vous pouvez stocker tous les documents importants liés à votre voiture (assurance, factures, preuves d'entretien, etc.).</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="headingFive">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                Qui sommes nous ?
+            </button>
+        </h2>
+        <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+            <div class="accordion-body">
+                Ce projet a été développé par un groupe de quatre étudiants en apprentissage qui étudient à l'ISA NUM, une école d'ingénieurs spécialisée en informatique située à Anglet. Cette école propose régulièrement des projets de groupe semestriels en lien avec les Objectifs de Développement Durable (ODD) de l'ONU, et cette application web en est le résultat direct.
+                Pour en apprendre plus sur l’école et ses étudiants, rendez vous sur <a href="https://isanum.univ-pau.fr/fr/actualites.html" style="text-decoration: none; color: #3498db; font-weight: 500;">le site officiel de l'école</a> !
             </div>
         </div>
     </div>
