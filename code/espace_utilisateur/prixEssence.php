@@ -1,47 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!--icones de bootstrap-->
+</head>
+
+<!--HEADER-->
+<?php
+include_once './../parties_fixes/header.html';
+?>
+
+<body>
+
+<!-- sidebar -->
+<?php 
+include_once './../parties_fixes/sidebar.html';
+?>
+    
+    hello
+
+
+
+</body>
+
+
 <?php
 
-include './../curl-8.17.0/include/curl/curl.h';
-// URL de l'API (à adapter selon ce que tu vois dans Swagger)
-$apiUrl = "https://api.prix-carburants.2aaz.fr/stations";
+?>
+test
 
-// --- 1. Appel API ---
 
-$ch = curl_init('https://api.prix-carburants.2aaz.fr/fuel/1/price/2024?responseFields=PriceTTC&key=SAE');
-curl_setopt($ch, CURLOPT_URL, $apiUrl);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+<!--FOOTER-->
+<?php
+include_once './../parties_fixes/footer.html';
+?>
 
-$response = curl_exec($ch);
 
-if(curl_errno($ch)){
-    echo "Erreur cURL : " . curl_error($ch);
-    exit;
-}
-
-curl_close($ch);
-
-// --- 2. Décodage JSON ---
-$data = json_decode($response, true);
-
-if (!$data) {
-    echo "Erreur : réponse JSON invalide";
-    exit;
-}
-
-// --- 3. Extraction des carburants et de leurs prix ---
-echo "<h2>Liste des carburants et leurs prix</h2>";
-
-foreach ($data as $station) {
-    if (!isset($station['fuels'])) continue;
-
-    echo "<h3>Station : " . htmlspecialchars($station['name'] ?? 'Sans nom') . "</h3>";
-    
-    foreach ($station['fuels'] as $fuel) {
-        $fuelName = $fuel['name'] ?? "Carburant inconnu";
-        $fuelPrice = $fuel['price'] ?? "N/A";
-        $dateMaj = $fuel['updated'] ?? "Date inconnue";
-
-        echo "- <b>$fuelName</b> : $fuelPrice € (maj : $dateMaj)<br>";
-    }
-
-    echo "<br>";
-}
+</html>
