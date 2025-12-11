@@ -70,32 +70,32 @@ $typeUser = $user['typeUser']*/
         <?php //if ($typeUser == "user") {?>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
+                    <a href="./../espace_utilisateur/prixEssence.php" class="nav-link active" aria-current="page">
                     <i class="bi bi-fuel-pump-fill me-2"></i>
-                    <span class="sidebar-text">Essence</span>
+                    <span class="sidebar-text">Prix Essence</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/documents.php" class="nav-link text-white">
                     <i class="bi bi-file-earmark-text me-2"></i>
                     <span class="sidebar-text">Mes documents</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/mesGarages.php" class="nav-link text-white">
                     <i class="bi bi-building-fill me-2"></i>
                     <span class="sidebar-text">Mes Garages</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/mesVehicules.php" class="nav-link text-white">
                     <i class="bi bi-car-front-fill me-2"></i>
                     <span class="sidebar-text">Mes Véhicules</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/carnetEntretien.php" class="nav-link text-white">
                     <i class="bi bi-folder-fill me-2"></i>
                     <span class="sidebar-text">Mes Carnets</span>
                     </a>
@@ -106,15 +106,15 @@ $typeUser = $user['typeUser']*/
         <!-- <?php //else { ?> 
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active" aria-current="page">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                    Statistiques
+                    <a href="./../espace_admin/statAdmin.php" class="nav-link text-white">
+                    <i class="bi bi-bar-chart-line-fill"></i>
+                    <span class="sidebar-text">Statistiques</span>
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="nav-link text-white">
-                    <svg class="bi me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                    Gestion
+                    <a href="./../espace_admin/gestionAdmin.php" class="nav-link text-white">
+                    <i class="bi bi-sliders"></i>
+                    <span class="sidebar-text">Gestion</span>
                     </a>
                 </li>
             </ul>

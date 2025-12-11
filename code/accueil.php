@@ -15,9 +15,9 @@
 </head>
 
 
-<!--HEADER-->
+<!--sidebar-->
 <?php
-include_once './parties_fixes/header.html';
+include_once './parties_fixes/sidebar.php';
 ?>
 
 
@@ -266,11 +266,6 @@ include_once './parties_fixes/header.html';
 
 <hr>
 
-
-<!--FOOTER-->
-<?php
-include_once 'parties_fixes/footer.html';
-?>
 
 
 </html>

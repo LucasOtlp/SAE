@@ -13,16 +13,11 @@
     <!--icones de bootstrap-->
 </head>
 
-<!--HEADER-->
-<?php
-include_once './../parties_fixes/header.html';
-?>
-
 <body>
 
 <!-- sidebar -->
 <?php 
-include_once './../parties_fixes/sidebar.html';
+include_once './../parties_fixes/sidebar.php';
 ?>
     
     hello
@@ -30,18 +25,7 @@ include_once './../parties_fixes/sidebar.html';
 
 
 </body>
-
-
-<?php
-
-?>
 test
-
-
-<!--FOOTER-->
-<?php
-include_once './../parties_fixes/footer.html';
-?>
 
 
 </html>
