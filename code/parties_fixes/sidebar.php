@@ -1,5 +1,8 @@
-<?php 
-/*require_once 'connection.php';
+<?php
+session_start();
+ini_set('display_errors', 1);
+error_reporting(E_ALL); 
+/*require_once './../connection.php';
 
 if (!isset($_SESSION['idAdmin'])) {
     header('Location: loginUser.php');
@@ -16,42 +19,39 @@ $typeUser = $user['typeUser']*/
 ?>
 
 <style>
-    /* 1. Configuration de base de la sidebar */
     .sidebar-custom {
         width: 280px;
-        transition: all 0.3s ease; /* Animation fluide lors du changement de taille */
+        transition: all 0.3s ease; 
     }
 
-    /* 2. Comportement sur Mobile / Tablette (écran < 768px) */
+
     @media (max-width: 768px) {
         .sidebar-custom {
-            width: 80px !important; /* On réduit la largeur */
-            text-align: center; /* On centre tout */
-            padding: 10px !important; /* Moins de padding */
+            width: 80px; 
+            text-align: center; 
+            padding: 10px; 
         }
 
-        /* On cache le texte des liens et le titre */
         .sidebar-text, 
         .sidebar-title {
-            display: none !important;
+            display: none;
         }
 
-        /* On ajuste la taille des icones pour qu'elles soient bien visibles */
+
         .nav-link i {
-            font-size: 1.5rem; /* Icones plus grosses sur mobile */
-            margin-right: 0 !important; /* On enlève la marge à droite de l'icone */
+            font-size: 1.5rem; 
+            margin-right: 0;
         }
         
-        /* On centre les liens */
+
         .nav-link {
             justify-content: center;
             display: flex;
         }
         
-        /* Ajustement du logo/header */
         .logo-area {
-            justify-content: center !important;
-            margin-right: 0 !important;
+            justify-content: center;
+            margin-right: 0;
         }
     }
 </style>
