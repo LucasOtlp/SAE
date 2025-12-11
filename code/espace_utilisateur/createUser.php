@@ -5,7 +5,7 @@
 session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-require_once 'connection.php';
+require_once './../connection.php';
 
 $message = '';
 
@@ -57,6 +57,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             margin: 0;
             background-color: #f8f9fa;
             overflow-x: hidden; /* Évite le scroll horizontal */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         input.form-control {
@@ -100,6 +103,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             align-items: center;
             justify-content: center;
         }
+
 
         .login-box {
             max-width: 400px;
@@ -162,40 +166,40 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
   </style>
+
 </head>
 <body>
 
 <div class="d-flex min-vh-100"> 
-    <?php include_once "sidebar.php"; ?>
 
     <div class="d-flex flex-column w-100">
 
         <div class="header-login">
-        <nav class="container d-flex justify-content-between align-items-center flex-wrap position-relative">
-            <div class="d-flex align-items-center gap-2">
-            <h2 class="m-0">Compte MyCarX</h2>
-            </div>
+            <nav class="container d-flex justify-content-between align-items-center flex-wrap position-relative">
+                <div class="d-flex align-items-center gap-2">
+                <h2 class="m-0">Compte MyCarX</h2>
+                </div>
 
-            <!-- PC -->
-            <div class="nav-links d-flex gap-3">
-            <a href="./loginUser.php" class="text-decoration-none text-primary">Se connecter</a>
-            <a href="#" class="text-decoration-none text-secondary">Créer mon compte MyCarX</a>
-            </div>
+                <!-- PC -->
+                <div class="nav-links d-flex gap-3">
+                <a href="#" class="text-decoration-none text-secondary">Se connecter</a>
+                <a href="./createUser.php" class="text-decoration-none text-primary">Créer mon compte MyCarX</a>
+                </div>
 
-            <!-- Phone -->
-            <div class="dropdown position-static">
-            <button class="btn btn-outline-secondary navbar-toggler" type="button" id="mobileMenuBtn">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+                <!-- Phone -->
+                <div class="dropdown position-static">
+                <button class="btn btn-outline-secondary navbar-toggler" type="button" id="mobileMenuBtn">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
-            <div class="dropdown-menu-custom w-100 text-center">
-                <ul class="list-unstyled m-0">
-                <li><a class="dropdown-item py-3 d-block text-decoration-none text-primary" href="./loginUser.php">Se connecter</a></li>
-                <li><a class="dropdown-item py-3 d-block text-decoration-none text-secondary" href="#">Créer un compte MyCarX</a></li>
-                </ul>
-            </div>
-            </div>
-        </nav>
+                <div class="dropdown-menu-custom w-100 text-center">
+                    <ul class="list-unstyled m-0">
+                    <li><a class="dropdown-item py-3 d-block text-decoration-none text-secondary" href="#">Se connecter</a></li>
+                    <li><a class="dropdown-item py-3 d-block text-decoration-none text-primary" href="./createUser.php">Créer un compte MyCarX</a></li>
+                    </ul>
+                </div>
+                </div>
+            </nav>
         </div>
 
 
