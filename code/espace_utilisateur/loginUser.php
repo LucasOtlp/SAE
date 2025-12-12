@@ -16,13 +16,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username !== '' && $password !== '') {
         $passwordSha = sha1($password);
 
-        $stmt = $pdo->prepare("SELECT idAdmin FROM Admin WHERE usernameAdmin = ? AND passwordAdmin = ?");
+        $stmt = $pdo->prepare("SELECT id_user FROM utilisateur WHERE mail = ? AND mdp = ?");
         $stmt->execute([$username, $passwordSha]);
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
         if ($admin) {
-            $_SESSION['idAdmin'] = $admin['idAdmin'];
-            header('Location: ./');
+            $_SESSION['id_user'] = $admin['id_user'];
+            header('Location: ./../accueil.php');
             exit;
         } else {
             $message = "<div class='alert alert-danger'>Informations incorrectes.</div>";
