@@ -2,20 +2,20 @@
 session_start();
 ini_set('display_errors', 1);
 error_reporting(E_ALL); 
-/*require_once './../connection.php';
+require_once './../connection.php';
 
-if (!isset($_SESSION['idAdmin'])) {
-    header('Location: loginUser.php');
+if (!isset($_SESSION['id_user'])) {
+    header('Location: ./../espace_utilisateur/loginUser.php');
     exit;
 }
 
-$id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$id = $_SESSION['id_user'];
 
-$sql = $pdo->prepare("SELECT typeUser FROM User WHERE idAdmin = ?");
+$sql = $pdo->prepare("SELECT * FROM Utilisateur WHERE id_user = ?");
 $sql->execute([$id]);
-$user = $stmt->fetch(PDO::FETCH_ASSOC);
+$user = $sql->fetch(PDO::FETCH_ASSOC);
 
-$typeUser = $user['typeUser']*/
+$typeUser = $user['type_user'];
 ?>
 
 <style>
@@ -68,7 +68,6 @@ $typeUser = $user['typeUser']*/
     </a>
     <hr>
     <!-- User = simple user -->
-        <?php //if ($typeUser == "user") {?>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="./../espace_utilisateur/prixEssence.php" class="nav-link active" aria-current="page">
@@ -102,9 +101,8 @@ $typeUser = $user['typeUser']*/
                     </a>
                 </li>
             </ul>
-        <?php //} ?>
-    <!-- User = admin -->
-        <!-- <?php //else { ?> 
+    <!-- User = garagiste -->
+        <?php if ($typeUser == "garagiste") { ?>
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
                     <a href="./../espace_admin/statAdmin.php" class="nav-link text-white">
@@ -112,17 +110,11 @@ $typeUser = $user['typeUser']*/
                     <span class="sidebar-text">Statistiques</span>
                     </a>
                 </li>
-                <li>
-                    <a href="./../espace_admin/gestionAdmin.php" class="nav-link text-white">
-                    <i class="bi bi-sliders"></i>
-                    <span class="sidebar-text">Gestion</span>
-                    </a>
-                </li>
             </ul>
-        <?php //} ?>-->
+        <?php } ?>
     <hr>
     <div>
-      <a href="compte.php"> <strong> <?php //echo "$user['nom'] $user['prenom']; "?> </strong> </a>
+      <a href="compte.php"> <strong> <?php echo "$user['nom'] $user['prenom']; "?> </strong> </a>
     </div>
 </div>
 
