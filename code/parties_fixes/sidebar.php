@@ -11,7 +11,7 @@ if (!isset($_SESSION['id_user'])) {
 
 $id = $_SESSION['id_user'];
 
-$sql = $pdo->prepare("SELECT * FROM Utilisateur WHERE id_user = ?");
+$sql = $pdo->prepare("SELECT * FROM utilisateur WHERE id_user = ?");
 $sql->execute([$id]);
 $user = $sql->fetch(PDO::FETCH_ASSOC);
 
@@ -100,21 +100,18 @@ $typeUser = $user['type_user'];
                     <span class="sidebar-text">Mes Carnets</span>
                     </a>
                 </li>
-            </ul>
     <!-- User = garagiste -->
         <?php if ($typeUser == "garagiste") { ?>
-            <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
+                <li>
                     <a href="./../espace_admin/statAdmin.php" class="nav-link text-white">
                     <i class="bi bi-bar-chart-line-fill"></i>
                     <span class="sidebar-text">Statistiques</span>
                     </a>
                 </li>
-            </ul>
         <?php } ?>
     <hr>
     <div>
-      <a href="compte.php"> <strong> <?php echo "$user['nom'] $user['prenom']; "?> </strong> </a>
+      <a href="compte.php"> <strong> <?php echo $user['nom'] . ' ' . $user['prenom']; ?> </strong> </a>
     </div>
 </div>
 

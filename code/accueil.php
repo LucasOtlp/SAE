@@ -17,12 +17,12 @@
 
 <!--sidebar-->
 <?php
-include_once './parties_fixes/sidebar.php';
+include_once './../parties_fixes/sidebar.php';
 ?>
 
+<body class="d-flex">
 
-
-<body>
+<div class="flex-grow-1">
 
     <div class="px-4 py-5 my-5 text-center">
         <img class="d-block mx-auto mb-4"
@@ -179,7 +179,6 @@ include_once './parties_fixes/sidebar.php';
         document.body.style.paddingTop = header.offsetHeight + 'px';
     </script>
 
-</body>
 
 <!--FAQ-->
 
@@ -265,7 +264,8 @@ include_once './parties_fixes/sidebar.php';
 </div>
 
 <hr>
-
+</div>
+</body>
 
 
 </html>
