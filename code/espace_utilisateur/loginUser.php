@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($admin) {
             $_SESSION['id_user'] = $admin['id_user'];
-            header('Location: ./../accueil.php');
+            header('Location: ./../espace_utilisateur/carnetEntretien.php');
             exit;
         } else {
             $message = "<div class='alert alert-danger'>Informations incorrectes.</div>";

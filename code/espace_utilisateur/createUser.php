@@ -182,8 +182,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 <!-- PC -->
                 <div class="nav-links d-flex gap-3">
-                <a href="#" class="text-decoration-none text-secondary">Se connecter</a>
-                <a href="./createUser.php" class="text-decoration-none text-primary">Créer mon compte MyCarX</a>
+                <a href="./loginUser.php" class="text-decoration-none text-primary">Se connecter</a>
+                <a href="./createUser.php" class="text-decoration-none text-secondary">Créer mon compte MyCarX</a>
                 </div>
 
                 <!-- Phone -->
