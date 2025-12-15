@@ -33,8 +33,8 @@
                 notre application.
             </p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a href="./espace_utilisateur/createUser.php">Je m'inscris</a></button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4"><a href="./espace_utilisateur/loginUser.php">Je me connecte</button>
+                <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a style="text-decoration: none; color: white;" href="./espace_utilisateur/createUser.php">Je m'inscris</a></button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4"><a style="text-decoration: none; color: blue;" href="./espace_utilisateur/loginUser.php">Je me connecte</a></button>
             </div>
         </div>
     </div>
@@ -51,8 +51,7 @@
                     de vos entretiens et révisions.
                 </p>
                 <div class="d-grid gap-2 d-md-flex justify-content-md-start mb-4 mb-lg-3">
-                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold">J'accède à mon carnet
-                        d'entretien</button>
+                    <button type="button" class="btn btn-primary btn-lg px-4 me-md-2 fw-bold"><a style="text-decoration: none; color: white;" href="./espace_utilisateur/carnetEntretien.php">J'accède à mon carnet d'entretien</a></button>
                 </div>
             </div>
             <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
@@ -163,7 +162,9 @@
             </p>
             <div class="d-inline-flex gap-2 mb-5">
                 <button class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="button">
+                <a style="text-decoration: none; color: white;" href="./espace_utilisateur/mesVehicules.php">
                     J'accède à mon véhicule
+                </a>
                 </button>
             </div>
         </div>
