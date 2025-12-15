@@ -15,13 +15,9 @@
 </head>
 
 
-<!--sidebar-->
-<?php
-include_once './../parties_fixes/sidebar.php';
-?>
+
 
 <body class="d-flex">
-
 <div class="flex-grow-1">
 
     <div class="px-4 py-5 my-5 text-center">
@@ -37,8 +33,8 @@ include_once './../parties_fixes/sidebar.php';
                 notre application.
             </p>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-                <button type="button" class="btn btn-primary btn-lg px-4 gap-3">Je m'inscris</button>
-                <button type="button" class="btn btn-outline-secondary btn-lg px-4">Je me connecte</button>
+                <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a href="./espace_utilisateur/createUser.php">Je m'inscris</a></button>
+                <button type="button" class="btn btn-outline-secondary btn-lg px-4"><a href="./espace_utilisateur/loginUser.php">Je me connecte</button>
             </div>
         </div>
     </div>

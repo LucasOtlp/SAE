@@ -22,6 +22,14 @@ $typeUser = $user['type_user'];
     .sidebar-custom {
         width: 280px;
         transition: all 0.3s ease; 
+        position: sticky; 
+        top: 0;
+        height: 100dvh;
+        overflow-y: auto;
+    }
+
+    .sidebar-custom::-webkit-scrollbar {
+        width: 6px;
     }
 
 
@@ -61,7 +69,7 @@ $typeUser = $user['type_user'];
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!--icones de bootstrap-->
 
-<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark min-vh-100 sidebar-custom">
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-custom">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none logo-area">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#MyCarX"></use></svg>
       <span class="fs-4">MyCarX</span>
