@@ -30,8 +30,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = "<div class='alert alert-danger'>Adresse e-mail déjà utilisée.</div>";
         }
 
-        $stmt = $pdo->prepare("INSERT INTO utilisateur (prenom, nom, mail, mdp) VALUES (?, ?, ?, ?)");
-        $stmt->execute([$prenom, $nom, $username, $passwordSha]);
+        $stmt = $pdo->prepare("INSERT INTO utilisateur (prenom, nom, mail, mdp, type_user) VALUES (?, ?, ?, ?, ?)");
+        $stmt->execute([$prenom, $nom, $username, $passwordSha, "client"]);
         $message = "<div class='alert alert-success'>Compte créé avec succès !</div>";
 
 
@@ -230,6 +230,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 <i data-feather="eye" class="password-toggle" id="togglePassword"></i>
                         </div>
                         </label>
+                        <div>
+                            <br>
+                            <small>Si vous êtes un garage, contactez-nous au +33 6 83 84 80 12 pour créer votre compte</small>
+                        </div>
                     </div>
                     <p> </p>
                     <button type="submit" class="btn btn-primary w-100">Se connecter</button>
