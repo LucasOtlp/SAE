@@ -9,10 +9,12 @@ try {
 }
 */
 //POUR EVA
+
 try {
     $pdo = new PDO('mysql:host=db;dbname=bd_SAE3;charset=utf8', 'user1', 'isanum');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     die("Connection failed : " . $e->getMessage());
 }
+    
 ?>

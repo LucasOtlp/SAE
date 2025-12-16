@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($username !== '' && $password !== '' && $nom !== '' && $prenom !== '') {
         $passwordSha = sha1($password);
 
-        $stmt = $pdo->prepare("SELECT idAdmin FROM Admin WHERE usernameAdmin = ?");
+        $stmt = $pdo->prepare("SELECT id_user FROM utilisateur WHERE id_user = ?");
         $stmt->execute([$username]);
         $admin = $stmt->fetch(PDO::FETCH_ASSOC);
 
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $message = "<div class='alert alert-danger'>Adresse e-mail déjà utilisée.</div>";
         }
 
-        $stmt = $pdo->prepare("INSERT INTO Admin (prenomAdmin, nomAdmin, usernameAdmin, passwordAdmin) VALUES (?, ?, ?, ?)");
+        $stmt = $pdo->prepare("INSERT INTO utilisateur (prenom, nom, mail, mdp) VALUES (?, ?, ?, ?)");
         $stmt->execute([$prenom, $nom, $username, $passwordSha]);
         $message = "<div class='alert alert-success'>Compte créé avec succès !</div>";
 
