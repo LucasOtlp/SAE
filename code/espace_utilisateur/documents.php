@@ -1,4 +1,5 @@
 <?php
+$active = "documents";
 include_once './../parties_fixes/sidebar.php';
 ?>
 <!DOCTYPE html>

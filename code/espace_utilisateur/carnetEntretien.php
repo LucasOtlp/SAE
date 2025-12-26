@@ -1,4 +1,5 @@
 <?php
+$active = "carnet";
 include_once './../parties_fixes/sidebar.php';
 ?>
 <!DOCTYPE html>
