@@ -9,6 +9,10 @@ if (!isset($_SESSION['id_user'])) {
     exit;
 }
 
+if(!isset($active)){
+    $active = "carnet";
+}
+
 $id = $_SESSION['id_user'];
 
 $sql = $pdo->prepare("SELECT * FROM utilisateur WHERE id_user = ?");
@@ -78,32 +82,32 @@ $typeUser = $user['type_user'];
     <!-- User = simple user -->
             <ul class="nav nav-pills flex-column mb-auto">
                 <li class="nav-item">
-                    <a href="./../espace_utilisateur/prixEssence.php" class="nav-link active" aria-current="page">
+                    <a href="./../espace_utilisateur/prixEssence.php" class="nav-link <?php if($active == "essence"){ echo "active"; }else{ echo "text-white";} ?>" aria-current="page">
                     <i class="bi bi-fuel-pump-fill me-2"></i>
                     <span class="sidebar-text">Prix Essence</span>
                     </a>
                 </li>
                 
                 <li>
-                    <a href="./../espace_utilisateur/documents.php" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/documents.php" class="nav-link <?php if($active == "documents"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-file-earmark-text me-2"></i>
                     <span class="sidebar-text">Mes documents</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./../espace_utilisateur/mesGarages.php" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/mesGarages.php" class="nav-link <?php if($active == "garage"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-building-fill me-2"></i>
                     <span class="sidebar-text">Mes Garages</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./../espace_utilisateur/mesVehicules.php" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/mesVehicules.php" class="nav-link <?php if($active == "vehicule"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-car-front-fill me-2"></i>
                     <span class="sidebar-text">Mes Véhicules</span>
                     </a>
                 </li>
                 <li>
-                    <a href="./../espace_utilisateur/carnetEntretien.php" class="nav-link text-white">
+                    <a href="./../espace_utilisateur/carnetEntretien.php" class="nav-link <?php if($active == "carnet"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-folder-fill me-2"></i>
                     <span class="sidebar-text">Mes Carnets</span>
                     </a>
