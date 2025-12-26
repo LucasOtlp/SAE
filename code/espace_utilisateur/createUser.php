@@ -15,24 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $prenom = $_POST['prenom'] ?? '';
     $nom = $_POST['nom'] ?? '';
 
-    if (!(strlen($password) > 8 && preg_match('/[^A-Za-z0-9]/', $password) )) {
-        $message = "<div class='alert alert-danger'>Le mot de passe doit contenir au moins 1 caractère spécial.</div>";
-    }
-
-    if ($username !== '' && $password !== '' && $nom !== '' && $prenom !== '') {
-        $passwordSha = sha1($password);
-
-        $stmt = $pdo->prepare("SELECT id_user FROM utilisateur WHERE id_user = ?");
-        $stmt->execute([$username]);
-        $admin = $stmt->fetch(PDO::FETCH_ASSOC);
-
-        if ($admin) {
-            $message = "<div class='alert alert-danger'>Adresse e-mail déjà utilisée.</div>";
+    // Vérification que le mdp soit assez long, qu'il contient un caractere special
+        if (!(strlen($password) > 8 && preg_match('/[^A-Za-z0-9]/', $password) )) {
+            $message = "<div class='alert alert-danger'>Le mot de passe doit contenir au moins 1 caractère spécial.</div>";
         }
 
-        $stmt = $pdo->prepare("INSERT INTO utilisateur (prenom, nom, mail, mdp, type_user) VALUES (?, ?, ?, ?, ?)");
-        $stmt->execute([$prenom, $nom, $username, $passwordSha, "client"]);
-        $message = "<div class='alert alert-success'>Compte créé avec succès !</div>";
+    if ($username !== '' && $password !== '' && $nom !== '' && $prenom !== '') {
+        // Chiffrement du mot de passe avec sha1
+            $passwordSha = sha1($password);
+
+        // On vérifie si l'email est déjà utilisé ou non
+            $stmt = $pdo->prepare("SELECT id_user FROM utilisateur WHERE id_user = ?");
+            $stmt->execute([$username]);
+            $admin = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($admin) {
+                $message = "<div class='alert alert-danger'>Adresse e-mail déjà utilisée.</div>";
+            }
+            else {
+                $stmt = $pdo->prepare("INSERT INTO utilisateur (prenom, nom, mail, mdp, type_user) VALUES (?, ?, ?, ?, ?)");
+                $stmt->execute([$prenom, $nom, $username, $passwordSha, "client"]);
+                $message = "<div class='alert alert-success'>Compte créé avec succès !</div>";
+            }
 
 
     } else {
@@ -205,7 +209,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <div class="main-content">
             <div class="login-box">
-                <h2 class="text-center mb-12">Connectez-vous</h2>
+                <h2 class="text-center mb-12">Créez votre compte</h2>
 
                 <?= $message ?>
 
@@ -236,7 +240,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     </div>
                     <p> </p>
-                    <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+                        <button type="submit" class="btn btn-primary w-100">Créer mon compte</button>
                 </form>
             </div>
         </div>
@@ -256,8 +260,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         toggle.addEventListener("click", () => {
         isVisible = !isVisible;
         passwordField.type = isVisible ? "text" : "password";
-
-        // Change uniquement l’icône SVG sans recréer tout le DOM
         toggle.innerHTML = feather.icons[isVisible ? "eye-off" : "eye"].toSvg();
         });
         </script>
