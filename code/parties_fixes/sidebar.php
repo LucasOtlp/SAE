@@ -39,7 +39,7 @@ $typeUser = $user['type_user'];
 
     @media (max-width: 768px) {
         .sidebar-custom {
-            width: 80px; 
+            width: 100px; 
             text-align: center; 
             padding: 10px; 
         }
