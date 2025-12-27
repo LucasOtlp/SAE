@@ -247,12 +247,12 @@ if (isset($_GET['supprimer'])) {
                                         </h6>
                                         <div class="d-flex gap-2 buttonG">
                                             <a href="<?php echo $lienFichier; ?>" class="btn btn-sm btn-outline-dark flex-fill text-nowrap" download>
-                                                <i class="bi bi-download"></i> <span class="d-none d-sm-inline">DL</span>
+                                                <i class="bi bi-download"></i> <span class="d-none d-sm-inline">Télécharger</span>
                                             </a>
                                             <a href="?supprimer=<?php echo $nomFichier; ?>" 
                                                 class="btn btn-sm btn-outline-danger flex-fill text-nowrap" 
                                                 onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce fichier ?');">
-                                                <i class="bi bi-trash"></i> <span class="d-none d-sm-inline">Suppr.</span>
+                                                <i class="bi bi-trash"></i> <span class="d-none d-sm-inline">Supprimer</span>
                                             </a>
                                         </div>
                                     </div>
