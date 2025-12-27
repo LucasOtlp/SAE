@@ -4,6 +4,7 @@ error_reporting(E_ALL);
 $active = "documents";
 include_once './../parties_fixes/sidebar.php';
 
+$message = "Ajouter un document : ";
 
 
 
@@ -34,43 +35,48 @@ $typesAutorises = [
 ];
 
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['files']) && isset($_POST['name'])) {
+if (($_SERVER['REQUEST_METHOD'] === 'POST') && isset($_FILES['files'])) {
+    if ($_POST['name'] != "") {
     
-    $fichier = $_FILES['files'];
+        $fichier = $_FILES['files'];
 
-    // Vérification s'il y a des erreurs 
-    if ($fichier['error'] !== UPLOAD_ERR_OK) {
-        $message = ("Erreur lors de l'upload. Code erreur : " . $fichier['error']);
-    }
-    else {
-        // Vérification de la taille 
-        if ($fichier['size'] > $tailleMax) {
-            $message = ("Erreur : Le fichier est trop volumineux.");
+        // Vérification s'il y a des erreurs 
+        if ($fichier['error'] !== UPLOAD_ERR_OK) {
+            $message = ("Erreur lors de l'upload. Code erreur : " . $fichier['error']);
         }
         else {
-            //Vérification de sécurité du type
-            $finfo = new finfo(FILEINFO_MIME_TYPE);
-            $typeReel = $finfo->file($fichier['tmp_name']);
-            if (!in_array($typeReel, $typesAutorises)) {
-                $message = ("Erreur : Type de fichier non autorisé.");
+            // Vérification de la taille 
+            if ($fichier['size'] > $tailleMax) {
+                $message = ("Erreur : Le fichier est trop volumineux.");
             }
             else {
-                $extension = strtolower(pathinfo($fichier['name'], PATHINFO_EXTENSION));
-                $nouveauNom = $_POST['name'] . '.' . $extension;
-                $cheminFinal = $dossierCible . $nouveauNom;
-                //Vérification qu'un fichier ne possède déjà pas ce nom
-                if (!(file_exists($cheminFinal))) {
-                    if (move_uploaded_file($fichier['tmp_name'], $cheminFinal)) {
-                        $message = "Succès ! Fichier bien enregistré.";
-                    } else {
-                        $message = "Erreur lors de l'enregistrement du fichier.";
-                    }
+                //Vérification de sécurité du type
+                $finfo = new finfo(FILEINFO_MIME_TYPE);
+                $typeReel = $finfo->file($fichier['tmp_name']);
+                if (!in_array($typeReel, $typesAutorises)) {
+                    $message = ("Erreur : Type de fichier non autorisé.");
                 }
                 else {
-                    $message = "Nom de fichier déjà utilisé";
+                    $extension = strtolower(pathinfo($fichier['name'], PATHINFO_EXTENSION));
+                    $nouveauNom = $_POST['name'] . '.' . $extension;
+                    $cheminFinal = $dossierCible . $nouveauNom;
+                    //Vérification qu'un fichier ne possède déjà pas ce nom
+                    if (!(file_exists($cheminFinal))) {
+                        if (move_uploaded_file($fichier['tmp_name'], $cheminFinal)) {
+                            $message = "Succès ! Fichier bien enregistré.";
+                        } else {
+                            $message = "Erreur lors de l'enregistrement du fichier.";
+                        }
+                    }
+                    else {
+                        $message = "Nom de fichier déjà utilisé";
+                    }
                 }
             }
         }
+    }
+    else {
+        $message = "Nom de fichier vide ";
     }
 }
 
@@ -89,9 +95,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_FILES['files']) && isset($_
 <div class="flex-grow-1">
 
     <form method="post" enctype="multipart/form-data" class="row g-3 bg-white p-4 shadow rounded">
-
         <div class="col-md-12 text-center">
-            <label for="files" class="form-label text-center">Ajouter un document : </label>
+            <label for="files" class="form-label text-center"><?php echo "$message"; ?></label>
             <input type="file" name="files" accept="image/*, video/*, .pdf, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .txt, .rtf, .odt">
         </div>
         <div class="col-md-12 text-center">
