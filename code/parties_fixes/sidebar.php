@@ -115,7 +115,7 @@ $typeUser = $user['type_user'];
     <!-- User = garagiste -->
         <?php if ($typeUser == "garagiste") { ?>
                 <li>
-                    <a href="./../espace_admin/statAdmin.php" class="nav-link text-white">
+                    <a href="./../espace_admin/statAdmin.php" class="nav-link <?php if($active == "stats"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-bar-chart-line-fill"></i>
                     <span class="sidebar-text">Statistiques</span>
                     </a>

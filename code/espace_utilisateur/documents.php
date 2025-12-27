@@ -17,7 +17,17 @@ include_once './../parties_fixes/sidebar.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-echo "oui";
+include './../parties_fixes/sidebar.php';
 ?>
 
-<!-- documents.php -->
+<div class="flex-grow-1">
+
+    <form method="post" enctype="multipart/form-data" class="row g-3 bg-white p-4 shadow rounded">
+
+        <div class="col-md-11">
+            <label for="files" class="form-label">Ajouter un document</label>
+            <input type="file" name="files" accept="*.*">
+        </div>
+
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+</div>

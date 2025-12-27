@@ -1,5 +1,5 @@
 <?php
-
+$active = 'stats';
 session_start();
 require_once './../connection.php'; 
 
