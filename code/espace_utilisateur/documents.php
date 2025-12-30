@@ -1,13 +1,9 @@
 <?php
+$active = "documents";
+include_once './../parties_fixes/sidebar.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-$active = "documents";
-
-
 $message = "Ajouter un document";
-
-
-
 
 $dossierCible = 'uploads/'; // Dossier où on stocke les fichiers
 $tailleMax = 1000 * 1024 * 1024; // Taille autorisée (ici 1000 Mo)
@@ -153,8 +149,6 @@ if (isset($_GET['supprimer'])) {
 </head>
 
 <body class="d-flex">
-
-    <?php include_once './../parties_fixes/sidebar.php'; ?>
 
     <div class="flex-grow-1 scroll">
 
