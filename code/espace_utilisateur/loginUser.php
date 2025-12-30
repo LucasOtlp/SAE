@@ -36,13 +36,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <title>MyCarX - Connexion</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>MyCarX - Connexion</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-  <style>
+    <style>
         body {
             margin: 0;
             background-color: #f8f9fa;
@@ -151,36 +151,36 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 display: flex !important;
             }
         }
-  </style>
+    </style>
 </head>
 <body>
 
-<div class="header-login">
-  <nav class="container d-flex justify-content-between align-items-center flex-wrap position-relative">
-    <div class="d-flex align-items-center gap-2">
-      <h2 class="m-0">Compte MyCarX</h2>
-    </div>
+    <div class="header-login">
+    <!-- #endregion --> <nav class="container d-flex justify-content-between align-items-center flex-wrap position-relative">
+        <div class="d-flex align-items-center gap-2">
+            <h2 class="m-0">Compte MyCarX</h2>
+        </div>
 
     <!-- PC -->
-    <div class="nav-links d-flex gap-3">
-      <a href="#" class="text-decoration-none text-secondary">Se connecter</a>
-      <a href="./createUser.php" class="text-decoration-none text-primary">Créer mon compte MyCarX</a>
-    </div>
+        <div class="nav-links d-flex gap-3">
+            <a href="#" class="text-decoration-none text-secondary">Se connecter</a>
+            <a href="./createUser.php" class="text-decoration-none text-primary">Créer mon compte MyCarX</a>
+        </div>
 
     <!-- Phone -->
-    <div class="dropdown position-static">
-      <button class="btn btn-outline-secondary navbar-toggler" type="button" id="mobileMenuBtn">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        <div class="dropdown position-static">
+            <button class="btn btn-outline-secondary navbar-toggler" type="button" id="mobileMenuBtn">
+                <span class="navbar-toggler-icon"></span>
+            </button>
 
-      <div class="dropdown-menu-custom w-100 text-center">
-        <ul class="list-unstyled m-0">
-          <li><a class="dropdown-item py-3 d-block text-decoration-none text-secondary" href="#">Se connecter</a></li>
-          <li><a class="dropdown-item py-3 d-block text-decoration-none text-primary" href="./createUser.php">Créer un compte MyCarX</a></li>
-        </ul>
-      </div>
-    </div>
-  </nav>
+            <div class="dropdown-menu-custom w-100 text-center">
+                <ul class="list-unstyled m-0">
+                    <li><a class="dropdown-item py-3 d-block text-decoration-none text-secondary" href="#">Se connecter</a></li>
+                    <li><a class="dropdown-item py-3 d-block text-decoration-none text-primary" href="./createUser.php">Créer un compte MyCarX</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 </div>
 
 
