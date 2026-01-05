@@ -123,7 +123,7 @@ $typeUser = $user['type_user'];
         <?php } ?>
     <hr>
     <div>
-      <a href="compte.php"> <strong> <?php echo $user['nom'] . ' ' . $user['prenom']; ?> </strong> </a>
+      <strong> <?php echo $user['nom'] . ' ' . $user['prenom']; ?> </strong>
     </div>
 </div>
 
