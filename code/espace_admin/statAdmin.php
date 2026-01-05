@@ -1,6 +1,6 @@
 <?php
 $active = 'stats';
-session_start();
+include './../parties_fixes/sidebar.php'; 
 require_once './../connection.php'; 
 
 $myGarageId = null;
@@ -153,8 +153,6 @@ $statsPieces = $pdo->query($sqlPieces)->fetchAll();
 </head>
 
 <body class="d-flex">
-
-    <?php include './../parties_fixes/sidebar.php'; ?>
 
     <div class="flex-grow-1 scroll">
         <div class="container-fluid p-4" style="max-width: 1600px;">
