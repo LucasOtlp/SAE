@@ -4,12 +4,12 @@ include_once './../parties_fixes/sidebar.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $message = "Ajouter un document";
-
+echo "Utilisateur PHP actuel : " . exec('whoami') . "<br>";
+echo "Propriétaire du fichier : " . posix_getpwuid(fileowner('chemin/vers/fichier'))['name'];
 $dossierCible = 'uploads/'; // Dossier où on stocke les fichiers
 chmod(__DIR__ . '/uploads/', 0755);
 $tailleMax = 1000 * 1024 * 1024; // Taille autorisée (ici 1000 Mo)
-echo "Utilisateur PHP actuel : " . exec('whoami') . "<br>";
-echo "Propriétaire du fichier : " . posix_getpwuid(fileowner('chemin/vers/fichier'))['name'];
+
 $typesAutorises = [
     'jpg'  => 'image/jpeg',
     'jpeg' => 'image/jpeg',
