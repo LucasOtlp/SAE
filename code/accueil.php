@@ -1,3 +1,23 @@
+<?php
+$tutoriels = [
+    [
+        'titre' => "Vérifier le niveau d'huile moteur",
+        'image' => "./multimedia/images/niveau-huile.jpg", 
+        'video' => "./multimedia/videos/NiveauHuile.mp4"
+    ],
+    [
+        'titre' => "Démarrer avec une batterie à plat",
+        'image' => "./multimedia/images/demarrage-batterie.jpg",
+        'video' => "./multimedia/videos/DemarrageBatterie.mp4"
+    ],
+    [
+        'titre' => "Les différents types de carburants",
+        'image' => "./multimedia/images/types-carburants.jpg",
+        'video' => "./multimedia/videos/TypesCarburants.mp4"
+    ]
+];
+?>
+
 <!DOCTYPE html>
 
 <html>
@@ -70,90 +90,32 @@
 
 
 
+
     <div class="container px-4 py-5" id="custom-cards">
         <h2 class="pb-2 border-bottom">Nos tutoriels</h2>
+        
         <div class="row row-cols-1 row-cols-lg-3 align-items-stretch g-4 py-5">
+            
+            <?php foreach($tutoriels as $tuto): ?>
             <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                    style="background-image: url('unsplash-photo-1.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Vérifier le niveau d'huile moteur</h3>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-                                    class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center me-3">
-                                <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Location">
-                                    <use xlink:href="#geo-fill"></use>
-                                </svg>
-                                <small>Fait par</small>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Duration">
-                                    <use xlink:href="#calendar3"></use>
-                                </svg> <small>Gérard</small>
-                            </li>
-                        </ul>
+                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg video-card-trigger"
+                        style="background-image: url('<?php echo $tuto['image']; ?>'); background-size: cover; background-position: center; cursor: pointer; min-height: 300px;"
+                        data-video="<?php echo $tuto['video']; ?>">
+                        
+                    <div class="d-flex flex-column h-100 p-4 pb-3 text-white text-shadow-1" 
+                        style="background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);">
+                        
+                        <h3 class="mt-auto mb-4 display-6 lh-1 fw-bold"><?php echo $tuto['titre']; ?></h3>
                     </div>
                 </div>
             </div>
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                    style="background-image: url('unsplash-photo-2.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Configurer son pare soleil</h3>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-                                    class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center me-3">
-                                <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Location">
-                                    <use xlink:href="#geo-fill"></use>
-                                </svg>
-                                <small>Fait par</small>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Duration">
-                                    <use xlink:href="#calendar3"></use>
-                                </svg>
-                                <small>Gérard 2</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4 shadow-lg"
-                    style="background-image: url('unsplash-photo-3.jpg');">
-                    <div class="d-flex flex-column h-100 p-5 pb-3 text-shadow-1">
-                        <h3 class="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">Comment fermer son coffre par la pensée</h3>
-                        <ul class="d-flex list-unstyled mt-auto">
-                            <li class="me-auto">
-                                <img src="https://github.com/twbs.png" alt="Bootstrap" width="32" height="32"
-                                    class="rounded-circle border border-white">
-                            </li>
-                            <li class="d-flex align-items-center me-3">
-                                <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Location">
-                                    <use xlink:href="#geo-fill"></use>
-                                </svg>
-                                <small>Fait par</small>
-                            </li>
-                            <li class="d-flex align-items-center">
-                                <svg class="bi me-2" width="1em" height="1em" role="img" aria-label="Duration">
-                                    <use xlink:href="#calendar3"></use>
-                                </svg>
-                                <small>Garard</small>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+            <?php endforeach; ?>
+
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+            <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a style="text-decoration: none; color: white;" href="./tutos.php">Voir plus</a></button>
         </div>
     </div>
-
-
 
     <div class="container my-5">
         <div class="p-5 text-center bg-body-tertiary rounded-3">
@@ -264,6 +226,80 @@
 
 <hr>
 </div>
+
+
+<div id="videoModal" class="custom-modal">
+  <div class="custom-modal-content">
+    <span class="close-btn">&times;</span>
+    <div class="video-wrapper">
+      <video id="videoPlayer" controls style="width: 100%; height: 100%; object-fit: contain; background:black;">
+          <source src="" type="video/mp4">
+          Votre navigateur ne gère pas la vidéo.
+      </video>
+    </div>
+  </div>
+</div>
+
+<style>
+.custom-modal {
+  display: none; position: fixed; z-index: 9999; left: 0; top: 0;
+  width: 100%; height: 100%; background-color: rgba(0, 0, 0, 0.9);
+  align-items: center; justify-content: center;
+}
+.custom-modal-content {
+  position: relative; width: 90%; max-width: 1100px; max-height: 90vh;
+  background: #000; border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.5); overflow: hidden;
+  display: flex; justify-content: center;
+}
+.video-wrapper { position: relative; width: 100%; }
+.close-btn {
+  position: absolute; top: 10px; right: 20px; color: white;
+  font-size: 40px; cursor: pointer; z-index: 100; font-weight: bold;
+  text-shadow: 0 0 5px black; line-height: 1;
+}
+.video-card-trigger { transition: transform 0.3s ease; }
+.video-card-trigger:hover { transform: scale(1.02); z-index: 10; }
+.text-gradient-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.5) 50%, transparent 100%);
+    border-radius: 16px; /* Doit correspondre à l'arrondi de votre carte */
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    const modal = document.getElementById('videoModal');
+    const player = document.getElementById('videoPlayer');
+    const closeBtn = document.querySelector('.close-btn');
+    const triggers = document.querySelectorAll('.video-card-trigger');
+
+    triggers.forEach(card => {
+        card.addEventListener('click', () => {
+            const videoFile = card.getAttribute('data-video');
+            if(videoFile) {
+                player.src = videoFile;
+                modal.style.display = 'flex';
+                player.play(); 
+            }
+        });
+    });
+
+    const closeModal = () => {
+        modal.style.display = 'none';
+        player.pause(); 
+        player.src = ""; 
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === "Escape" && modal.style.display === 'flex') closeModal();
+    });
+});
+</script>
+
 </body>
 
 
