@@ -8,7 +8,8 @@ $message = "Ajouter un document";
 $dossierCible = 'uploads/'; // Dossier où on stocke les fichiers
 chmod(__DIR__ . '/uploads/', 0755);
 $tailleMax = 1000 * 1024 * 1024; // Taille autorisée (ici 1000 Mo)
-
+echo "Utilisateur PHP actuel : " . exec('whoami') . "<br>";
+echo "Propriétaire du fichier : " . posix_getpwuid(fileowner('chemin/vers/fichier'))['name'];
 $typesAutorises = [
     'jpg'  => 'image/jpeg',
     'jpeg' => 'image/jpeg',
