@@ -17,13 +17,19 @@ include_once './../parties_fixes/sidebar.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include_once "./../connection.php";
+
+//connexion à l'API pour obtenir le prix de l'essence dans les stations essence en France
+require './../vendor/autoload.php';
+use GuzzleHttp\Client;
+$client = new Client(['base_uri' => 'https://recherche-entreprises.api.gouv.fr/search']);
+
 ?>
 
     <div class="container my-5 me-5">
         <div class="p-5 text-center bg-body-tertiary rounded-5"> 
             <h1 class="text-body-emphasis">Accédez aux garages</h1>
             <p class="col-lg-8 mx-auto fs-5 text-muted">
-                
+                Cherchez un garage parmis ceux enregistrés sur le site
             </p>
             <div> 
                 <form action="./mesGarages.php" method="POST">
@@ -54,7 +60,7 @@ include_once "./../connection.php";
             <div class="mx-auto p-2">
                 <?php
                     if(isset($_REQUEST["garage"]) && $_REQUEST["garage"] != "" ){
-                        //Envoie et traitement de la requete API
+                        //Recherche dans la base de données du site
                         $ordreSQL = "SELECT * FROM garage WHERE nom='".$_REQUEST["garage"]."'";
                         $resultat = $pdo->query($ordreSQL);
                         $leGarage = $resultat->fetch();
@@ -66,6 +72,7 @@ include_once "./../connection.php";
                         }else{
                             echo "aucun garage correspondant";
                         }
+
                     }else{
                         $ordreSQL = "SELECT * FROM garage";
                         $lesGarages = $pdo->query($ordreSQL);
@@ -75,9 +82,46 @@ include_once "./../connection.php";
                             echo "<tr><td> ".$leGarage["nom"]." </td><td> ".$leGarage["mail"]." </td></tr>";
                         }
                         echo "</table>";
-
                     }
                 ?>
+
+                <p class="col-lg-8 mx-auto fs-5 text-muted">
+                    Cherchez un garage autour de chez vous
+                </p>
+                <div> 
+                    <form action="./mesGarages.php" method="POST">
+                        Code postal
+                        <input type="text" name="CP">
+                        <br>
+                        <br>
+                        <input class="d-inline-flex align-items-center btn btn-primary btn-lg px-4 rounded-pill" type="submit" value ="chercher mon garage">
+                    </form>
+                </div>
+
+
+
+                <?php
+                    if(isset($_REQUEST["CP"]) && is_numeric($_REQUEST["CP"]) && strlen($_REQUEST["CP"]) == 5){
+                        //Envoie et traitement de la requete API pour rechercher le garage dans la base des entreprises françaises
+                        $response = $client->request('GET', '?activite_principale=45.20A%2C45.20B%2C45.11Z&code_postal='.$_REQUEST["CP"]);
+                        $body = $response->getBody()->getContents();
+                        $data = json_decode($body, true);
+                        if ($data["results"]){
+                            echo "<table>";
+                            echo "<tr><th>Nom</th><th>Adresse siège</th><th>adresse garage</th></tr>";
+                            foreach($data["results"] as $garage){
+                                for($i=0;$i<count($garage["matching_etablissements"]);$i++){
+                                    echo "<tr><td> ".$garage["nom_complet"]." </td><td> ".$garage["siege"]["adresse"]." </td><td> ".$garage["matching_etablissements"][$i]["adresse"]." </td></tr>";
+                                }
+                            }
+                            echo "</table>";
+                        }else {
+                            echo "pas de station dans la ville choisie";
+                        }
+                    }
+                ?>
+
+
             </div>
         </div>
     </div>
