@@ -6,6 +6,7 @@ error_reporting(E_ALL);
 $message = "Ajouter un document";
 
 $dossierCible = 'uploads/'; // Dossier où on stocke les fichiers
+chmod(__DIR__ . '/uploads/', 0755);
 $tailleMax = 1000 * 1024 * 1024; // Taille autorisée (ici 1000 Mo)
 
 $typesAutorises = [
