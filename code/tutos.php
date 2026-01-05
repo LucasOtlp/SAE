@@ -73,6 +73,30 @@ $tutoriels_Culture = [
 
 <body>
 
+    <div class="container-fluid pt-4 px-4">
+        <div class="row align-items-center">
+            <div class="col-md-3 col-6">
+                <a href="./accueil.php">
+                    <button class="btn btn-primary rounded-pill px-4 py-2 shadow-sm" type="button">
+                        <i class="bi bi-arrow-left me-2"></i> Retour
+                    </button>
+                </a>
+            </div>
+
+            <div class="col-md-6 d-none d-md-block text-center">
+                <h1 class="fw-bold display-5 mb-0">Tutoriels Mécaniques</h1>
+            </div>
+
+            <div class="col-md-3 d-none d-md-block"></div>
+            
+            <div class="col-12 d-md-none text-center mt-3">
+                <h1 class="fw-bold h2">Tutoriels Mécaniques</h1>
+            </div>
+        </div>
+    </div>
+
+    <hr class="my-4 mx-5 opacity-25">
+
     <div class="container px-4 py-5" id="custom-cards">
         
         <h2 class="pb-2 border-bottom">Économies et Carburants</h2>
