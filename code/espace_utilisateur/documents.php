@@ -4,8 +4,7 @@ include_once './../parties_fixes/sidebar.php';
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 $message = "Ajouter un document";
-//echo "Utilisateur PHP actuel : " . exec('whoami') . "<br>";
-//echo "Propriétaire du fichier : " . posix_getpwuid(fileowner('chemin/vers/fichier'))['name'];
+
 $dossierCible = 'uploads/'; // Dossier où on stocke les fichiers
 $tailleMax = 1000 * 1024 * 1024; // Taille autorisée (ici 1000 Mo)
 
@@ -90,8 +89,8 @@ if (isset($_GET['supprimer'])) {
     if (file_exists($cheminFichier)) {
         if (unlink($cheminFichier)) {
             $message = "Fichier supprimé avec succès.";
-            header("Location: ./documents.php"); 
-            exit; 
+            echo "<script>window.location.reload();</script>";
+            exit;  
         } else {
             $message = "Erreur : Impossible de supprimer le fichier.";
         }
