@@ -1,4 +1,8 @@
 <?php
+include_once './../parties_fixes/sidebar.php';
+// Variable pour la sidebar active
+$active = "vehicule"; 
+
 // 1. Connexion et Session
 require_once './../connection.php'; 
 
@@ -76,8 +80,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
-// Variable pour la sidebar active
-$active = "vehicule"; 
 ?>
 
 <!DOCTYPE html>
@@ -90,8 +92,6 @@ $active = "vehicule";
 </head>
 
 <body class="d-flex">
-
-    <?php include_once './../parties_fixes/sidebar.php'; ?>
 
     <main class="flex-grow-1 p-4" style="background-color: #f8f9fa;">
         <div class="container">
