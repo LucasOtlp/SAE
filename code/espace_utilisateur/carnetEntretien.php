@@ -41,7 +41,7 @@ $stmt = $pdo->prepare("
 $stmt->execute([$id_user]);
 $interventions = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-$voitures = $pdo->prepare("SELECT numero_vin FROM voiture WHERE id_user = ?");
+$voitures = $pdo->prepare("SELECT numero_vin, immatriculation FROM voiture WHERE id_user = ?");
 $voitures->execute([$id_user]);
 
 $garages = $pdo->query("SELECT id_garage, nom FROM garage");
@@ -101,14 +101,14 @@ $pieces = $pdo->query("SELECT reference_piece, nom_piece FROM pieces");
     <form method="post" action="ajoutIntervention.php" class="row g-3">
 
         <div class="col-md-6">
-            <label class="form-label">Véhicule (VIN)</label>
+            <label class="form-label">Véhicule</label>
             <select name="vin" class="form-select" required>
                 <?php foreach ($voitures as $v): ?>
-                    <option value="<?= $v['numero_vin'] ?>">
-                        <?= $v['numero_vin'] ?>
+                    <option value="<?= htmlspecialchars($v['numero_vin']) ?>">
+                        <?= htmlspecialchars($v['immatriculation']) ?>
                     </option>
-                <?php endforeach; ?>
-            </select>
+                    <?php endforeach; ?>
+                </select>
         </div>
 
         <div class="col-md-3">
