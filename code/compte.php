@@ -177,7 +177,7 @@ try {
 
         <?= $message ?>
 
-        <form action="profil.php" method="POST">
+        <form action="compte.php" method="POST">
 
             <div class="form-group">
                 <label for="nom">Nom</label>
