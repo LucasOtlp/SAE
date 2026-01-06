@@ -74,32 +74,13 @@ $typeUser = $user['type_user'];
     <!--icones de bootstrap-->
 
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-custom">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none logo-area">
+    <a href="./../accueil.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none logo-area">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#MyCarX"></use></svg>
       <span class="fs-4">MyCarX</span>
     </a>
     <hr>
     <!-- User = simple user -->
             <ul class="nav nav-pills flex-column mb-auto">
-                <li class="nav-item">
-                    <a href="./../espace_utilisateur/prixEssence.php" class="nav-link <?php if($active == "essence"){ echo "active"; }else{ echo "text-white";} ?>" aria-current="page">
-                    <i class="bi bi-fuel-pump-fill me-2"></i>
-                    <span class="sidebar-text">Prix Essence</span>
-                    </a>
-                </li>
-                
-                <li>
-                    <a href="./../espace_utilisateur/documents.php" class="nav-link <?php if($active == "documents"){ echo "active"; }else{ echo "text-white";} ?>">
-                    <i class="bi bi-file-earmark-text me-2"></i>
-                    <span class="sidebar-text">Mes documents</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./../espace_utilisateur/mesGarages.php" class="nav-link <?php if($active == "garage"){ echo "active"; }else{ echo "text-white";} ?>">
-                    <i class="bi bi-building-fill me-2"></i>
-                    <span class="sidebar-text">Mes Garages</span>
-                    </a>
-                </li>
                 <li>
                     <a href="./../espace_utilisateur/mesVehicules.php" class="nav-link <?php if($active == "vehicule"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-car-front-fill me-2"></i>
@@ -112,6 +93,24 @@ $typeUser = $user['type_user'];
                     <span class="sidebar-text">Mes Carnets</span>
                     </a>
                 </li>
+                <li>
+                    <a href="./../espace_utilisateur/documents.php" class="nav-link <?php if($active == "documents"){ echo "active"; }else{ echo "text-white";} ?>">
+                    <i class="bi bi-file-earmark-text me-2"></i>
+                    <span class="sidebar-text">Mes documents</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="./../espace_utilisateur/mesGarages.php" class="nav-link <?php if($active == "garage"){ echo "active"; }else{ echo "text-white";} ?>">
+                    <i class="bi bi-building-fill me-2"></i>
+                    <span class="sidebar-text">Mes Garages</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="./../espace_utilisateur/prixEssence.php" class="nav-link <?php if($active == "essence"){ echo "active"; }else{ echo "text-white";} ?>" aria-current="page">
+                    <i class="bi bi-fuel-pump-fill me-2"></i>
+                    <span class="sidebar-text">Prix Essence</span>
+                    </a>
+                </li>                
     <!-- User = garagiste -->
         <?php if ($typeUser == "garagiste") { ?>
                 <li>

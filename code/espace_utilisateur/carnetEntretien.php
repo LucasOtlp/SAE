@@ -1,8 +1,6 @@
 <?php
 $active = "carnet";
 include_once './../parties_fixes/sidebar.php';
-// Variable pour la sidebar active
-$active = "vehicule"; 
 
 // 1. Connexion et Session
 require_once './../connection.php'; 
