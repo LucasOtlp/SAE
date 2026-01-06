@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once './../connection.php';
+require_once 'connection.php';
 
 if (!isset($_SESSION['id_user'])) {
     header("Location: loginUser.php");
@@ -21,6 +21,8 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $nom = $_POST["nom"]
+    $prenom = $_POST["prenom"];
 
     if (!empty($nom) && !empty($prenom)) {
         try {
