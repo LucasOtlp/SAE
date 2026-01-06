@@ -3,7 +3,6 @@
 require_once './../connection.php'; 
 
 // --- PARTIE 1 : LOGIQUE DE CALCUL (AJAX) ---
-// Si on reçoit une demande de calcul (POST) via JavaScript, on traite et on quitte.
 if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_POST['modele'])) {
     
     $modeleCible = $_POST['modele'];
@@ -17,7 +16,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
     $usurePhysique = $stmt->fetchAll();
 
     if (empty($usurePhysique)) {
-        echo "N/A"; // Pas de données pour ce modèle
+        echo "N/A"; 
         exit;
     }
 
@@ -40,7 +39,7 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
     $scoresFinaux = [];
     $dateActuelle = new DateTime();
 
-    // Boucle de calcul (Votre algorithme)
+    // Boucle de calcul
     foreach ($usurePhysique as $voiture) {
         $vin = $voiture['numero_vin'];
         $kmActuel = (int)$voiture['km_actuel'];
@@ -76,20 +75,19 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
     // Retourne la moyenne formatée
     if (count($scoresFinaux) > 0) {
         $moyenne = array_sum($scoresFinaux) / count($scoresFinaux);
-        echo number_format($moyenne, 1); // Ex: "66.8"
+        echo number_format($moyenne, 1); 
     } else {
         echo "N/A";
     }
     
-    exit; // IMPORTANT : On arrête le script ici pour ne pas renvoyer le HTML
+    exit; 
 }
 
 // --- PARTIE 2 : AFFICHAGE DE LA PAGE (HTML) ---
 $active = "vehicule";
 include_once './../parties_fixes/sidebar.php';
 
-// Récupération des véhicules de l'utilisateur
-// NOTE : J'ai ajouté m.designation dans le SELECT pour savoir quel modèle envoyer au calcul
+$id = $_SESSION['id_user'];
 $requeteVoituresUser = "SELECT 
                             v.numero_vin,
                             CONCAT(ma.nom, ' ', mo.designation, ' ', mo.generation) AS nom_voiture,
@@ -97,8 +95,11 @@ $requeteVoituresUser = "SELECT
                         FROM voiture v
                         JOIN modele mo ON v.id_modele = mo.id_modele
                         JOIN marque ma ON mo.id_marque = ma.id_marque
-                        WHERE v.id_user = 2"; // ID User Connecté
-$voituresUser = $pdo->query($requeteVoituresUser)->fetchAll();
+                        WHERE v.id_user = :id_user";
+$requetePreparee = $pdo->prepare($requeteVoituresUser);
+$requetePreparee->bindValue(":id_user", $id, PDO::PARAM_INT );
+$requetePreparee->execute();
+$voituresUser = $requetePreparee->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
@@ -109,9 +110,15 @@ $voituresUser = $pdo->query($requeteVoituresUser)->fetchAll();
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
-        /* Animation pour le chargement */
         .spinner-border-sm { --bs-spinner-width: 1rem; --bs-spinner-height: 1rem; }
         .score-display { font-size: 2rem; font-weight: bold; color: #0d6efd; transition: all 0.3s; }
+        
+        /* Animation d'apparition du score */
+        .animate-score { animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
     </style>
 </head>
 
@@ -119,8 +126,15 @@ $voituresUser = $pdo->query($requeteVoituresUser)->fetchAll();
 
 <main class="flex-grow-1 p-4" style="background-color: #f8f9fa;">
     <div class="container">
+        
         <h2 class="mb-4">Mes Véhicules</h2>
         
+        <div class="text-center mb-5">
+            <a href="ajouterVehicule.php" class="btn btn-success shadow px-4 py-2 fw-bold">
+                <i class="bi bi-plus-circle me-2"></i>Ajouter un nouveau véhicule
+            </a>
+        </div>
+
         <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
             <?php if (empty($voituresUser)): ?>
                 <div class="col-12">
@@ -137,8 +151,7 @@ $voituresUser = $pdo->query($requeteVoituresUser)->fetchAll();
                             
                             <div class="card-body d-flex flex-column justify-content-center align-items-center">
                                 
-                                <div id="result-<?php echo $voiture['numero_vin']; ?>" class="mb-3" style="min-height: 50px;">
-                                    </div>
+                                <div id="result-<?php echo $voiture['numero_vin']; ?>" class="w-100"></div>
 
                                 <button class="btn btn-outline-primary fw-bold py-2 shadow-sm btn-calcul" 
                                         data-vin="<?php echo $voiture['numero_vin']; ?>"
@@ -173,12 +186,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const resultDiv = document.getElementById('result-' + vin);
             const btn = this;
 
-            // 1. Interface : Afficher un chargement
+            // 1. Interface : Loader DANS le bouton
             btn.disabled = true;
-            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Calcul...';
-            resultDiv.innerHTML = '';
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
 
-            // 2. Appel AJAX (Fetch) vers ce même fichier
+            // 2. Appel AJAX
             const formData = new FormData();
             formData.append('action', 'calcul_score');
             formData.append('modele', modele);
@@ -189,19 +201,21 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.text())
             .then(data => {
-                // 3. Affichage du résultat
-                resultDiv.innerHTML = `<div class="score-display">${data}<span style="font-size:1rem; color:#6c757d;">/100</span></div>`;
-                
-                // Restauration du bouton (optionnel, on peut le laisser désactivé)
-                btn.innerHTML = '<i class="bi bi-check-circle me-2"></i>Score calculé';
-                btn.classList.remove('btn-outline-primary');
-                btn.classList.add('btn-success');
+                // On cache le bouton
+                btn.style.display = 'none';
+
+                // On affiche le score à la place du bouton
+                resultDiv.innerHTML = `
+                    <div class="score-display animate-score">
+                        ${data}<span style="font-size:1rem; color:#6c757d;">/100</span>
+                    </div>`;
             })
             .catch(error => {
                 console.error('Erreur:', error);
-                resultDiv.innerHTML = '<span class="text-danger">Erreur</span>';
+                // En cas d'erreur, on réaffiche le bouton en rouge
+                btn.innerHTML = '<i class="bi bi-exclamation-triangle me-2"></i>Erreur';
+                btn.classList.replace('btn-outline-primary', 'btn-outline-danger');
                 btn.disabled = false;
-                btn.innerHTML = '<i class="bi bi-speedometer2 me-2"></i>Réessayer';
             });
         });
     });
