@@ -14,7 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = $_POST['password'] ?? '';
 
     if ($username !== '' && $password !== '') {
-        $passwordSha = sha1($password);
+        //$passwordSha = sha1($password);
+        $passwordSha = $password;
 
         $stmt = $pdo->prepare("SELECT id_user FROM utilisateur WHERE mail = ? AND mdp = ?");
         $stmt->execute([$username, $passwordSha]);
