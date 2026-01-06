@@ -30,7 +30,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
     $stmt->execute(['modele' => $modeleCible]);
     $historique = $stmt->fetchAll();
 
-    // Organisation des interventions
     $interventionsParVin = [];
     foreach ($historique as $inter) {
         $interventionsParVin[$inter['numero_vin']][] = $inter;
@@ -39,17 +38,14 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
     $scoresFinaux = [];
     $dateActuelle = new DateTime();
 
-    // Boucle de calcul
     foreach ($usurePhysique as $voiture) {
         $vin = $voiture['numero_vin'];
         $kmActuel = (int)$voiture['km_actuel'];
         
-        // Pilier A : Usure
         $dateMec = new DateTime($voiture['mise_en_circulation']);
         $ageAnnees = $dateActuelle->diff($dateMec)->days / 365.25;
         $scoreU = 100 * ((0.4 * max(0, 1 - ($ageAnnees / 15))) + (0.6 * max(0, 1 - ($kmActuel / 250000))));
 
-        // Pilier B & C
         $listeInter = $interventionsParVin[$vin] ?? [];
         $coutTotal = 0;
         $sommeEcarts = 0;
@@ -72,7 +68,6 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
         $scoresFinaux[] = ($scoreU * 0.4) + ($scoreF * 0.2) + ($scoreC * 0.4);
     }
 
-    // Retourne la moyenne formatée
     if (count($scoresFinaux) > 0) {
         $moyenne = array_sum($scoresFinaux) / count($scoresFinaux);
         echo number_format($moyenne, 1); 
@@ -88,8 +83,16 @@ $active = "vehicule";
 include_once './../parties_fixes/sidebar.php';
 
 $id = $_SESSION['id_user'];
+// Mise à jour de la requête pour inclure les détails demandés
 $requeteVoituresUser = "SELECT 
                             v.numero_vin,
+                            v.immatriculation,
+                            v.annee,
+                            v.couleur,
+                            v.puissance_vin,
+                            v.puissance_din,
+                            v.kilometrage,
+                            v.energie,
                             CONCAT(ma.nom, ' ', mo.designation, ' ', mo.generation) AS nom_voiture,
                             mo.designation AS nom_modele
                         FROM voiture v
@@ -103,7 +106,7 @@ $voituresUser = $requetePreparee->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
     <meta charset="UTF-8">
     <title>Mes Véhicules</title>
@@ -112,13 +115,12 @@ $voituresUser = $requetePreparee->fetchAll(PDO::FETCH_ASSOC);
     <style>
         .spinner-border-sm { --bs-spinner-width: 1rem; --bs-spinner-height: 1rem; }
         .score-display { font-size: 2rem; font-weight: bold; color: #0d6efd; transition: all 0.3s; }
-        
-        /* Animation d'apparition du score */
         .animate-score { animation: fadeIn 0.5s ease-in-out; }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        .modal-backdrop.show { opacity: 0.7; backdrop-filter: blur(4px); }
     </style>
 </head>
 
@@ -149,14 +151,20 @@ $voituresUser = $requetePreparee->fetchAll(PDO::FETCH_ASSOC);
                                 <i class="bi bi-car-front-fill" style="font-size: 5rem; color: #ced4da;"></i>
                             </div>
                             
-                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center gap-2">
                                 
                                 <div id="result-<?php echo $voiture['numero_vin']; ?>" class="w-100"></div>
 
-                                <button class="btn btn-outline-primary fw-bold py-2 shadow-sm btn-calcul" 
+                                <button class="btn btn-outline-primary w-100 fw-bold py-2 shadow-sm btn-calcul" 
                                         data-vin="<?php echo $voiture['numero_vin']; ?>"
                                         data-modele="<?php echo htmlspecialchars($voiture['nom_modele']); ?>">
                                     <i class="bi bi-speedometer2 me-2"></i>Calculer le Score
+                                </button>
+
+                                <button class="btn btn-light w-100 fw-bold text-secondary border" 
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#modal-<?php echo $voiture['numero_vin']; ?>">
+                                    <i class="bi bi-info-circle me-2"></i>Détails
                                 </button>
                             </div>
                             
@@ -164,11 +172,53 @@ $voituresUser = $requetePreparee->fetchAll(PDO::FETCH_ASSOC);
                                 <h5 class="card-title text-dark fw-bold mb-0">
                                     <?php echo htmlspecialchars($voiture['nom_voiture']); ?>
                                 </h5>
-                                <small class="text-muted">VIN: <?php echo $voiture['numero_vin']; ?></small>
+                                <small class="text-muted">Immat: <?php echo htmlspecialchars($voiture['immatriculation']); ?></small>
                             </div>
-
                         </div>
                     </div>
+
+                    <div class="modal fade" id="modal-<?php echo $voiture['numero_vin']; ?>" tabindex="-1" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content border-0 shadow">
+                                <div class="modal-header bg-primary text-white">
+                                    <h5 class="modal-title fw-bold"><?php echo htmlspecialchars($voiture['nom_voiture']); ?></h5>
+                                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body p-4">
+                                    <div class="row g-3">
+                                        <div class="col-6">
+                                            <label class="text-muted small d-block">Immatriculation</label>
+                                            <span class="fw-bold text-uppercase"><?php echo htmlspecialchars($voiture['immatriculation']); ?></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="text-muted small d-block">Année</label>
+                                            <span class="fw-bold"><?php echo htmlspecialchars($voiture['annee']); ?></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="text-muted small d-block">Énergie</label>
+                                            <span class="fw-bold text-capitalize"><?php echo htmlspecialchars($voiture['energie']); ?></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="text-muted small d-block">Puissance (VIN/DIN)</label>
+                                            <span class="fw-bold"><?php echo htmlspecialchars($voiture['puissance_vin'] . ' / ' . $voiture['puissance_din']); ?></span>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="text-muted small d-block">Kilométrage</label>
+                                            <span class="fw-bold text-primary"><?php echo number_format($voiture['kilometrage'], 0, ',', ' '); ?> km</span>
+                                        </div>
+                                        <div class="col-6">
+                                            <label class="text-muted small d-block">Couleur</label>
+                                            <span class="fw-bold text-capitalize"><?php echo htmlspecialchars($voiture['couleur']); ?></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer bg-light">
+                                    <button type="button" class="btn btn-secondary fw-bold" data-bs-dismiss="modal">Fermer</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 <?php endforeach; ?>
             <?php endif; ?>
         </div>
@@ -186,11 +236,10 @@ document.addEventListener('DOMContentLoaded', function() {
             const resultDiv = document.getElementById('result-' + vin);
             const btn = this;
 
-            // 1. Interface : Loader DANS le bouton
             btn.disabled = true;
+            const originalText = btn.innerHTML;
             btn.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
 
-            // 2. Appel AJAX
             const formData = new FormData();
             formData.append('action', 'calcul_score');
             formData.append('modele', modele);
@@ -201,18 +250,14 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .then(response => response.text())
             .then(data => {
-                // On cache le bouton
                 btn.style.display = 'none';
-
-                // On affiche le score à la place du bouton
                 resultDiv.innerHTML = `
-                    <div class="score-display animate-score">
+                    <div class="score-display animate-score mb-3">
                         ${data}<span style="font-size:1rem; color:#6c757d;">/100</span>
                     </div>`;
             })
             .catch(error => {
                 console.error('Erreur:', error);
-                // En cas d'erreur, on réaffiche le bouton en rouge
                 btn.innerHTML = '<i class="bi bi-exclamation-triangle me-2"></i>Erreur';
                 btn.classList.replace('btn-outline-primary', 'btn-outline-danger');
                 btn.disabled = false;
