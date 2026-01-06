@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once 'connection.php';
+require_once './../connection.php';
 
 if (!isset($_SESSION['id_user'])) {
     header("Location: loginUser.php");
@@ -187,8 +187,7 @@ try {
 
             <div class="form-group">
                 <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" name="prenom" 
-                       value="<?= htmlspecialchars($currentUser['prenom']) ?>" required>
+                <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($currentUser['prenom']) ?>" required>
             </div>
 
             <div class="form-group">
