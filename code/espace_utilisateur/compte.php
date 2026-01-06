@@ -21,7 +21,7 @@ if (isset($_GET['action']) && $_GET['action'] === 'logout') {
 
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom = $_POST["nom"]
+    $nom = $_POST["nom"];
     $prenom = $_POST["prenom"];
 
     if (!empty($nom) && !empty($prenom)) {
