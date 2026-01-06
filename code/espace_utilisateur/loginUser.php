@@ -1,6 +1,6 @@
 <?php
 
-// Using sha1 for password
+// Utilisation de sha1 pour hacher le mot de passe
 
 session_start();
 ini_set('display_errors', 1);
@@ -35,6 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <title>MyCarX - Connexion</title>
@@ -81,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             width: 100%;
             padding: 1rem 2rem;
             background: white;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .main-content {
@@ -97,15 +98,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             padding: 2rem;
             background: white;
             border-radius: 1rem;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
         }
 
         .dropdown-menu-custom {
             position: absolute;
-            top: 100%; 
+            top: 100%;
             left: 0;
             background: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             overflow: hidden;
             max-height: 0;
             opacity: 0;
@@ -114,7 +115,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         .dropdown-menu-custom.show {
-            max-height: 300px; 
+            max-height: 300px;
             opacity: 1;
             padding: 1rem 0;
         }
@@ -124,6 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             font-weight: 500;
             transition: background 0.3s;
         }
+
         .dropdown-menu-custom a:hover {
             background-color: #f8f9fa;
         }
@@ -132,12 +134,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%280, 0, 0, 1%29' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
         }
 
-
-
         @media (max-width: 833px) {
             .nav-links {
                 display: none !important;
             }
+
             .navbar-toggler {
                 display: block !important;
             }
@@ -147,102 +148,104 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             .navbar-toggler {
                 display: none !important;
             }
+
             .nav-links {
                 display: flex !important;
             }
         }
     </style>
 </head>
+
 <body>
-
     <div class="header-login">
-    <!-- #endregion --> <nav class="container d-flex justify-content-between align-items-center flex-wrap position-relative">
-        <div class="d-flex align-items-center gap-2">
-            <h2 class="m-0">Compte MyCarX</h2>
-        </div>
-
-    <!-- PC -->
-        <div class="nav-links d-flex gap-3">
-            <a href="#" class="text-decoration-none text-secondary">Se connecter</a>
-            <a href="./createUser.php" class="text-decoration-none text-primary">Créer mon compte MyCarX</a>
-        </div>
-
-    <!-- Phone -->
-        <div class="dropdown position-static">
-            <button class="btn btn-outline-secondary navbar-toggler" type="button" id="mobileMenuBtn">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="dropdown-menu-custom w-100 text-center">
-                <ul class="list-unstyled m-0">
-                    <li><a class="dropdown-item py-3 d-block text-decoration-none text-secondary" href="#">Se connecter</a></li>
-                    <li><a class="dropdown-item py-3 d-block text-decoration-none text-primary" href="./createUser.php">Créer un compte MyCarX</a></li>
-                </ul>
+        <!-- #endregion -->
+        <nav class="container d-flex justify-content-between align-items-center flex-wrap position-relative">
+            <div class="d-flex align-items-center gap-2">
+                <h2 class="m-0">Compte MyCarX</h2>
             </div>
-        </div>
-    </nav>
-</div>
-
-
-<div class="main-content">
-    <div class="login-box">
-        <h2 class="text-center mb-4">Connectez-vous</h2>
-
-        <?= $message ?>
-
-        <form method="POST">
-            <div class="row mb-2">
-                <div class="col-md-12 mb-2 mb-md-0">
-                    <input type="email" class="form-control" id="username" name="username" placeholder="E-mail" required>
-                </div>
-                <div class="col-md-12 password-wrapper">
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Mot de passe" required>
-                        <i data-feather="eye" class="password-toggle" id="togglePassword"></i>
+            <!-- PC -->
+            <div class="nav-links d-flex gap-3">
+                <a href="#" class="text-decoration-none text-secondary">Se connecter</a>
+                <a href="./createUser.php" class="text-decoration-none text-primary">Créer mon compte MyCarX</a>
+            </div>
+            <!-- Phone -->
+            <div class="dropdown position-static">
+                <button class="btn btn-outline-secondary navbar-toggler" type="button" id="mobileMenuBtn">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="dropdown-menu-custom w-100 text-center">
+                    <ul class="list-unstyled m-0">
+                        <li><a class="dropdown-item py-3 d-block text-decoration-none text-secondary" href="#">Se
+                                connecter</a></li>
+                        <li><a class="dropdown-item py-3 d-block text-decoration-none text-primary"
+                                href="./createUser.php">Créer un compte MyCarX</a></li>
+                    </ul>
                 </div>
             </div>
-            <p> </p>
-            <button type="submit" class="btn btn-primary w-100">Se connecter</button>
-        </form>
+        </nav>
     </div>
-</div>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const btn = document.getElementById("mobileMenuBtn");
-    const menu = document.querySelector(".dropdown-menu-custom");
 
-    btn.addEventListener("click", () => {
-        menu.classList.toggle("show");
-    });
+    <div class="main-content">
+        <div class="login-box">
+            <h2 class="text-center mb-4">Connectez-vous</h2>
+            <?= $message ?>
 
-    document.addEventListener("click", (e) => {
-        if (!btn.contains(e.target) && !menu.contains(e.target)) {
-            menu.classList.remove("show");
-        }
-    });
-});
-</script>
+            <form method="POST">
+                <div class="row mb-2">
+                    <div class="col-md-12 mb-2 mb-md-0">
+                        <input type="email" class="form-control" id="username" name="username" placeholder="E-mail"
+                            required>
+                    </div>
+                    <div class="col-md-12 password-wrapper">
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Mot de passe" required>
+                        <i data-feather="eye" class="password-toggle" id="togglePassword"></i>
+                    </div>
+                </div>
+                <p> </p>
+                <button type="submit" class="btn btn-primary w-100">Se connecter</button>
+            </form>
+        </div>
+    </div>
 
-<!-- Icon mdp -->
-<script src="https://unpkg.com/feather-icons"></script>
-<script>
-feather.replace();
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const btn = document.getElementById("mobileMenuBtn");
+            const menu = document.querySelector(".dropdown-menu-custom");
 
-const toggle = document.getElementById("togglePassword");
-const passwordField = document.getElementById("password");
+            btn.addEventListener("click", () => {
+                menu.classList.toggle("show");
+            });
 
-let isVisible = false;
+            document.addEventListener("click", (e) => {
+                if (!btn.contains(e.target) && !menu.contains(e.target)) {
+                    menu.classList.remove("show");
+                }
+            });
+        });
+    </script>
 
-toggle.addEventListener("click", () => {
-  isVisible = !isVisible;
-  passwordField.type = isVisible ? "text" : "password";
+    <!-- Icon mdp -->
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script>
+        feather.replace();
 
-  // Change uniquement l’icône SVG sans recréer tout le DOM
-  toggle.innerHTML = feather.icons[isVisible ? "eye-off" : "eye"].toSvg();
-});
-</script>
+        const toggle = document.getElementById("togglePassword");
+        const passwordField = document.getElementById("password");
 
+        let isVisible = false;
+
+        toggle.addEventListener("click", () => {
+            isVisible = !isVisible;
+            passwordField.type = isVisible ? "text" : "password";
+
+            // Change uniquement l’icône SVG sans recréer tout le DOM
+            toggle.innerHTML = feather.icons[isVisible ? "eye-off" : "eye"].toSvg();
+        });
+    </script>
 </body>
+
 </html>
