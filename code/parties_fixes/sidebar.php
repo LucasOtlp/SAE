@@ -84,13 +84,13 @@ $typeUser = $user['type_user'];
                 <li>
                     <a href="./../espace_utilisateur/mesVehicules.php" class="nav-link <?php if($active == "vehicule"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-car-front-fill me-2"></i>
-                    <span class="sidebar-text">Mes Véhicules</span>
+                    <span class="sidebar-text">Mes véhicules</span>
                     </a>
                 </li>
                 <li>
                     <a href="./../espace_utilisateur/carnetEntretien.php" class="nav-link <?php if($active == "carnet"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-folder-fill me-2"></i>
-                    <span class="sidebar-text">Mes Carnets</span>
+                    <span class="sidebar-text">Mon carnet d'entretien</span>
                     </a>
                 </li>
                 <li>
@@ -102,7 +102,7 @@ $typeUser = $user['type_user'];
                 <li>
                     <a href="./../espace_utilisateur/mesGarages.php" class="nav-link <?php if($active == "garage"){ echo "active"; }else{ echo "text-white";} ?>">
                     <i class="bi bi-building-fill me-2"></i>
-                    <span class="sidebar-text">Mes Garages</span>
+                    <span class="sidebar-text">Trouver un garage</span>
                     </a>
                 </li>
                 <li class="nav-item">
