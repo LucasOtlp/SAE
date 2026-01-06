@@ -10,9 +10,9 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
     
     // 1. Récupération des voitures du modèle
     $stmt = $pdo->prepare("SELECT v.numero_vin, v.mise_en_circulation, v.kilometrage AS km_actuel
-                           FROM voiture v
-                           JOIN modele m ON v.id_modele = m.id_modele
-                           WHERE m.designation = :modele");
+        FROM voiture v
+        JOIN modele m ON v.id_modele = m.id_modele
+        WHERE m.designation = :modele");
     $stmt->execute(['modele' => $modeleCible]);
     $usurePhysique = $stmt->fetchAll();
 
@@ -23,11 +23,11 @@ if (isset($_POST['action']) && $_POST['action'] === 'calcul_score' && isset($_PO
 
     // 2. Récupération historique
     $stmt = $pdo->prepare("SELECT i.numero_vin, i.cout, i.km_voiture AS km_au_moment_intervention
-                           FROM intervention i
-                           JOIN voiture v ON i.numero_vin = v.numero_vin
-                           JOIN modele m ON v.id_modele = m.id_modele
-                           WHERE m.designation = :modele
-                           ORDER BY i.numero_vin, i.date ASC");
+    FROM intervention i
+    JOIN voiture v ON i.numero_vin = v.numero_vin
+    JOIN modele m ON v.id_modele = m.id_modele
+    WHERE m.designation = :modele
+    ORDER BY i.numero_vin, i.date ASC");
     $stmt->execute(['modele' => $modeleCible]);
     $historique = $stmt->fetchAll();
 
