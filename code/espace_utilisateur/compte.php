@@ -1,53 +1,62 @@
 <?php
-session_start();
 require_once './../connection.php';
 
+$active = "compte";
+include_once './../parties_fixes/sidebar.php';
+
 if (!isset($_SESSION['id_user'])) {
-    header("Location: loginUser.php");
+    header("Location: ./../login.php");
     exit;
 }
 
 $id_user = $_SESSION['id_user'];
 $message = "";
 
-// Déconnexion
+/* ======================
+   DÉCONNEXION
+   ====================== */
 if (isset($_GET['action']) && $_GET['action'] === 'logout') {
-
-    $_SESSION = array();
     session_destroy();
-    header("Location: loginUser.php");
+    header("Location: ./../accueil.php");
     exit;
 }
 
+/* ======================
+   MISE À JOUR PROFIL
+   ====================== */
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $nom = trim($_POST["nom"]);
-    $prenom = trim($_POST["prenom"]);
-    $telephone = trim($_POST["telephone"]);
+    $nom = trim($_POST["nom"] ?? '');
+    $prenom = trim($_POST["prenom"] ?? '');
+    $telephone = trim($_POST["telephone"] ?? '');
 
-    if (!empty($nom) && !empty($prenom)) {
+    if ($nom !== '' && $prenom !== '') {
         try {
-            // Mise à jour de la bdd
-            $sql = "UPDATE utilisateur SET nom = ?, prenom = ?, telephone = ? WHERE id_user = ?";
-            $stmt = $pdo->prepare($sql);
+            $stmt = $pdo->prepare("
+                UPDATE utilisateur 
+                SET nom = ?, prenom = ?, telephone = ?
+                WHERE id_user = ?
+            ");
             $stmt->execute([$nom, $prenom, $telephone, $id_user]);
-            
-            $message = "<div class='alert success'>Informations modifiées avec succès !</div>";
+
+            $message = "<div class='alert alert-success'>Informations mises à jour avec succès.</div>";
         } catch (PDOException $e) {
-            $message = "<div class='alert error'>Erreur SQL : " . $e->getMessage() . "</div>";
+            $message = "<div class='alert alert-danger'>Erreur lors de la mise à jour.</div>";
         }
     } else {
-        $message = "<div class='alert error'>Le nom et le prénom sont obligatoires.</div>";
+        $message = "<div class='alert alert-warning'>Nom et prénom obligatoires.</div>";
     }
 }
 
-// Récupération des infos utilisateur
-try {
-    $stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE id_user = ?");
-    $stmt->execute([$id_user]);
-    $currentUser = $stmt->fetch();
-} catch (PDOException $e) {
-    die("Erreur de récupération : " . $e->getMessage());
+/* ======================
+   RÉCUPÉRATION UTILISATEUR
+   ====================== */
+$stmt = $pdo->prepare("SELECT * FROM utilisateur WHERE id_user = ?");
+$stmt->execute([$id_user]);
+$currentUser = $stmt->fetch(PDO::FETCH_ASSOC);
+
+if (!$currentUser) {
+    die("Utilisateur introuvable");
 }
 ?>
 
@@ -55,153 +64,62 @@ try {
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mon Profil</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-        }
-
-        .profil-container {
-            background-color: #ffffff;
-            width: 100%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-        }
-
-        .header-box {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            border-bottom: 2px solid #f0f0f0;
-            padding-bottom: 15px;
-        }
-
-        h1 {
-            font-size: 24px;
-            color: #333;
-            margin: 0;
-        }
-
-        .btn-logout {
-            background-color: #ff4d4d;
-            color: white;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 5px;
-            font-size: 14px;
-            transition: background 0.3s;
-        }
-
-        .btn-logout:hover {
-            background-color: #cc0000;
-        }
-
-        .form-group {
-            margin-bottom: 15px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #666;
-            font-weight: 600;
-        }
-
-        input[type="text"],
-        input[type="tel"], 
-        input[type="email"] {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-            box-sizing: border-box;
-            font-size: 16px;
-        }
-
-        input:focus {
-            border-color: #007bff;
-            outline: none;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            cursor: pointer;
-            font-weight: bold;
-            margin-top: 10px;
-            transition: background 0.3s;
-        }
-
-        .btn-submit:hover {
-            background-color: #0056b3;
-        }
-
-        .alert {
-            padding: 15px;
-            margin-bottom: 20px;
-            border-radius: 6px;
-            font-size: 14px;
-            text-align: center;
-        }
-
-        .success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    <title>Mon compte</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<body>
 
-    <div class="profil-container">
-        
-        <div class="header-box">
-            <h1>Mon Profil</h1>
-            <a href="compte.php?action=logout" class="btn-logout">Déconnexion</a>
+<body class="d-flex">
+
+<div class="flex-grow-1 p-4">
+
+    <div class="container" style="max-width: 600px;">
+
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1>Mon profil</h1>
+            <a href="compte.php?action=logout" class="btn btn-danger btn-sm">
+                Déconnexion
+            </a>
         </div>
 
         <?= $message ?>
 
-        <form action="compte.php" method="POST">
+        <form method="post" class="card p-4 shadow-sm">
 
-            <div class="form-group">
-                <label for="nom">Nom</label>
-                <input type="text" id="nom" name="nom" 
-                       value="<?= htmlspecialchars($currentUser['nom']) ?>" required>
+            <div class="mb-3">
+                <label class="form-label">Nom</label>
+                <input type="text"
+                       name="nom"
+                       class="form-control"
+                       value="<?= htmlspecialchars($currentUser['nom']) ?>"
+                       required>
             </div>
 
-            <div class="form-group">
-                <label for="prenom">Prénom</label>
-                <input type="text" id="prenom" name="prenom" value="<?= htmlspecialchars($currentUser['prenom']) ?>" required>
+            <div class="mb-3">
+                <label class="form-label">Prénom</label>
+                <input type="text"
+                       name="prenom"
+                       class="form-control"
+                       value="<?= htmlspecialchars($currentUser['prenom']) ?>"
+                       required>
             </div>
 
-            <div class="form-group">
-                <label for="telephone">Téléphone</label>
-                <input type="tel" id="telephone" name="telephone" 
+            <div class="mb-3">
+                <label class="form-label">Téléphone</label>
+                <input type="tel"
+                       name="telephone"
+                       class="form-control"
                        value="<?= htmlspecialchars($currentUser['telephone']) ?>">
             </div>
 
-            <button type="submit" class="btn-submit">Mettre à jour</button>
+            <button class="btn btn-primary w-100">
+                Mettre à jour mes informations
+            </button>
+
         </form>
+
     </div>
+
+</div>
 
 </body>
 </html>
