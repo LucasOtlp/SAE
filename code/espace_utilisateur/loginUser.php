@@ -7,6 +7,11 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 require_once './../connection.php';
 
+if (isset($_SESSION['id_user'])) {
+    header("Location: mesVehicules.php");
+    exit();
+}
+
 $message = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {

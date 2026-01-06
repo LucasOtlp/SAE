@@ -1,4 +1,7 @@
 <?php
+
+session_start();
+
 $tutoriels = [
     [
         'titre' => "Vérifier le niveau d'huile moteur",
@@ -54,10 +57,21 @@ $tutoriels = [
                 véhicule. Accédez dès à présent à votre espace pour profiter de toutes les fonctionnalités offertes par
                 notre application.
             </p>
+            <?php
+            if (!isset($_SESSION['id_user'])) { ?>
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
                 <button type="button" class="btn btn-primary btn-lg px-4 gap-3"><a style="text-decoration: none; color: white;" href="./espace_utilisateur/createUser.php">Je m'inscris</a></button>
                 <button type="button" class="btn btn-outline-secondary btn-lg px-4"><a style="text-decoration: none; color: blue;" href="./espace_utilisateur/loginUser.php">Je me connecte</a></button>
             </div>
+            <?php
+            } else {
+                ?>
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                <h2>Vous êtes connecté ! Accédez à vos <a href="./espace_utilisateur/mesVehicules.php">véhicules</a></h2>
+            </div>
+                <?php
+            }
+            ?>
         </div>
     </div>
 
