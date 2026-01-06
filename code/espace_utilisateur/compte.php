@@ -180,7 +180,7 @@ try {
 
         <?= $message ?>
 
-        <form action="compte.php" method="POST">
+        <form action="" method="POST">
 
             <div class="form-group">
                 <label for="nom">Nom</label>
@@ -195,8 +195,7 @@ try {
 
             <div class="form-group">
                 <label for="telephone">Téléphone</label>
-                <input type="tel" id="telephone" name="telephone" 
-                       value="<?= htmlspecialchars($currentUser['telephone']) ?>">
+                <input type="tel" id="telephone" name="telephone" value="<?= htmlspecialchars($currentUser['telephone']) ?>">
             </div>
 
             <button type="submit" class="btn-submit">Mettre à jour</button>
