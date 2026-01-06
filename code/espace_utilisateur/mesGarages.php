@@ -18,7 +18,7 @@ ini_set('display_errors', 1);
 error_reporting(E_ALL);
 include_once "./../connection.php";
 
-//connexion à l'API pour obtenir le prix de l'essence dans les stations essence en France
+//connexion à l'API pour accéder à l'annuaire des entreprises en France
 require './../vendor/autoload.php';
 use GuzzleHttp\Client;
 $client = new Client(['base_uri' => 'https://recherche-entreprises.api.gouv.fr/search']);
@@ -59,6 +59,7 @@ $client = new Client(['base_uri' => 'https://recherche-entreprises.api.gouv.fr/s
             </style>
             <div class="mx-auto p-2">
                 <?php
+                //On recherche un garage parmi ceux enregistrés dans le site si le champ associé est rempli
                     if(isset($_REQUEST["garage"]) && $_REQUEST["garage"] != "" ){
                         //Recherche dans la base de données du site
                         $ordreSQL = "SELECT * FROM garage WHERE nom='".$_REQUEST["garage"]."'";
@@ -74,6 +75,7 @@ $client = new Client(['base_uri' => 'https://recherche-entreprises.api.gouv.fr/s
                         }
 
                     }else{
+                        //on affiche tous les garages si le champ est vide
                         $ordreSQL = "SELECT * FROM garage";
                         $lesGarages = $pdo->query($ordreSQL);
                         echo "<table>";
@@ -101,8 +103,8 @@ $client = new Client(['base_uri' => 'https://recherche-entreprises.api.gouv.fr/s
 
 
                 <?php
+                    //on recherche les garages à l'aide de l'API des entreprises. Les codes 45.20A, 45.20B et 45.11Z sont ceux correspondants aux types d'entreprises cherchées (garages, concessions)
                     if(isset($_REQUEST["CP"]) && is_numeric($_REQUEST["CP"]) && strlen($_REQUEST["CP"]) == 5){
-                        //Envoie et traitement de la requete API pour rechercher le garage dans la base des entreprises françaises
                         $response = $client->request('GET', '?activite_principale=45.20A%2C45.20B%2C45.11Z&code_postal='.$_REQUEST["CP"]);
                         $body = $response->getBody()->getContents();
                         $data = json_decode($body, true);
