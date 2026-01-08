@@ -6,17 +6,17 @@ $tutoriels = [
     [
         'titre' => "Vérifier le niveau d'huile moteur",
         'image' => "./multimedia/images/niveau-huile.jpg", 
-        'video' => "./multimedia/videos/NiveauHuile.mp4"
+        'video' => "./multimedia/videos/huile_moteur.MOV"
     ],
     [
         'titre' => "Démarrer avec une batterie à plat",
         'image' => "./multimedia/images/demarrage-batterie.jpg",
-        'video' => "./multimedia/videos/DemarrageBatterie.mp4"
+        'video' => "./multimedia/videos/batterie.MOV"
     ],
     [
         'titre' => "Les différents types de carburants",
         'image' => "./multimedia/images/types-carburants.jpg",
-        'video' => "./multimedia/videos/TypesCarburants.mp4"
+        'video' => "./multimedia/videos/carburants.MOV"
     ]
 ];
 ?>
@@ -46,9 +46,6 @@ $tutoriels = [
 <div class="flex-grow-1">
 
     <div class="px-4 py-5 my-5 text-center">
-        <img class="d-block mx-auto mb-4"
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1566px-Test-Logo.svg.png?20150906031702"
-            alt="" width="72" height="57">
         <h1 class="display-5 fw-bold text-body-emphasis">MyCarX</h1>
         <div class="col-lg-6 mx-auto">
             <p class="lead mb-4">Une nouvelle façon de faire le suivi de l'entretien de son véhicule. Notre site vous
@@ -92,7 +89,7 @@ $tutoriels = [
             </div>
             <div class="col-lg-4 offset-lg-1 p-0 overflow-hidden shadow-lg">
                 <img class="rounded-lg-3"
-                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/11/Test-Logo.svg/1566px-Test-Logo.svg.png?20150906031702"
+                    src="./multimedia/images/accueil.jpeg"
                     alt="" width="720">
             </div>
         </div>

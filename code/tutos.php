@@ -3,12 +3,12 @@ $tutoriels_EcoCarb = [
     [
         'titre' => "Comprendre l'aérodynamisme",
         'image' => "./multimedia/images/aerodynamisme.jpg", 
-        'video' => "./multimedia/videos/Aerodynamisme.mp4"
+        'video' => "./multimedia/videos/aero.MOV"
     ],
     [
         'titre' => "Comprendre les différents types de carburants",
         'image' => "./multimedia/images/types-carburants.jpg", 
-        'video' => "./multimedia/videos/TypesCarburants.mp4"
+        'video' => "./multimedia/videos/carburants.MOV"
     ]
 ];
 
@@ -16,12 +16,12 @@ $tutoriels_Entretien = [
     [
         'titre' => "Vérifier le niveau d'huile moteur",
         'image' => "./multimedia/images/niveau-huile.jpg", 
-        'video' => "./multimedia/videos/NiveauHuile.mp4"
+        'video' => "./multimedia/videos/huile_moteur.MOV"
     ],
     [
         'titre' => "Vérifier la pression de ses pneus",
         'image' => "./multimedia/images/pression-pneus.jpeg", 
-        'video' => "./multimedia/videos/PressionPneus.mp4"
+        'video' => "./multimedia/videos/pression_pneu.MOV"
     ]
 ];
 
@@ -29,12 +29,12 @@ $tutoriels_Depannage = [
     [
         'titre' => "Changer une roue",
         'image' => "./multimedia/images/changement-roue.jpg", 
-        'video' => "./multimedia/videos/ChangementRoue.mp4"
+        'video' => "./multimedia/videos/pneu_creve.MOV"
     ],
     [
         'titre' => "Démarrer en cas de batterie KO",
         'image' => "./multimedia/images/demarrage-batterie.jpg", 
-        'video' => "./multimedia/videos/DemarrageBatterie.mp4"
+        'video' => "./multimedia/videos/batterie.MOV"
     ]
 ];
 
@@ -42,7 +42,7 @@ $tutoriels_Secu = [
     [
         'titre' => "Gérer ses phares la nuit",
         'image' => "./multimedia/images/gerer-phares.jpg", 
-        'video' => "./multimedia/videos/GererPhares.mp4"
+        'video' => "./multimedia/videos/feux.MOV"
     ]
 ];
 
@@ -50,7 +50,7 @@ $tutoriels_Culture = [
     [
         'titre' => "Comprendre le fonctionnement d'un moteur",
         'image' => "./multimedia/images/fonctionnement-moteur.jpg", 
-        'video' => "./multimedia/videos/FonctionnementMoteur.mp4"
+        'video' => "./multimedia/videos/moteur.MOV"
     ]
 ];
 ?>
