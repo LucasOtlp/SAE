@@ -261,7 +261,7 @@ $statsPieces = $pdo->query($sqlPieces)->fetchAll();
                                         else {
                                             $ratio = 0;
                                         }
-                                        // Fonction mac pour éviter les négatifs et *10 est une pénalité par piece changée
+                                        // Fonction max pour éviter les négatifs et *10 est une pénalité par piece changée
                                         $sante = max(0, 100 - ($ratio * 10));
                                         if ($sante > 80) {
                                             $colorClass = "tagG";
