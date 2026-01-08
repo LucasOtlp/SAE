@@ -6,17 +6,17 @@ $tutoriels = [
     [
         'titre' => "Vérifier le niveau d'huile moteur",
         'image' => "./multimedia/images/niveau-huile.jpg", 
-        'video' => "./multimedia/videos/huile_moteur.MOV"
+        'video' => "./multimedia/videos/NiveauHuile.mp4"
     ],
     [
         'titre' => "Démarrer avec une batterie à plat",
         'image' => "./multimedia/images/demarrage-batterie.jpg",
-        'video' => "./multimedia/videos/batterie.MOV"
+        'video' => "./multimedia/videos/DemarrageBatterie.mp4"
     ],
     [
         'titre' => "Les différents types de carburants",
         'image' => "./multimedia/images/types-carburants.jpg",
-        'video' => "./multimedia/videos/carburants.MOV"
+        'video' => "./multimedia/videos/TypesCarburants.mp4"
     ]
 ];
 ?>
